@@ -1,0 +1,41 @@
+{
+  "name": "emsi-lib",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "build:check": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cpilatre/emsi-lib.git"
+  },
+  "files": [
+    "lib"
+  ],
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "publishConfig": {
+    "access": "public"
+  },
+  "bugs": {
+    "url": "https://github.com/cpilatre/emsi-lib/issues"
+  },
+  "homepage": "https://github.com/cpilatre/emsi-lib#readme",
+  "devDependencies": {
+    "@types/he": "^1.1.1",
+    "@types/node": "^15.0.1",
+    "@types/uuid": "^8.3.0",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4"
+  },
+  "dependencies": {
+    "fast-xml-parser": "^3.19.0",
+    "he": "^1.2.0",
+    "uuid": "^8.3.2"
+  }
+}

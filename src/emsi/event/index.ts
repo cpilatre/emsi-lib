@@ -1,0 +1,6 @@
+export { Event } from './event'
+export { Casualties } from './casualties'
+export { Informations } from './informations'
+export { EGeo } from './event-geo'
+export { EType } from './event-type'
+export { Reference } from './reference'
