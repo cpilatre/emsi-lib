@@ -1,4 +1,4 @@
-import { js2xml, ParseOptions, xml2js } from '../common/parse'
+import { js2xml, Js2XmlFn, ParseOptions, xml2js } from '../common/parse'
 import { EmsiStatus } from '../common/types'
 import { Context } from "./context";
 import { Event } from "./event";
@@ -35,14 +35,14 @@ export class Emsi {
         return this
     }
 
-    generateXml (options?: ParseOptions): string {
+    generateXml (options?: ParseOptions, fn?: Js2XmlFn): string {
         return js2xml(
             { emsi: {
                 context: this.context,
                 event: this.event,
                 mission: this.mission,
                 resource: this.resource
-            }}, options )
+            }}, options, fn )
     }
 
     loadFromXml (xml: string): this {
