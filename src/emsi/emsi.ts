@@ -1,4 +1,4 @@
-import { js2xml, Js2XmlFn, ParseOptions, xml2js } from '../common/parse'
+import { js2xml, Js2XmlFn, ParseOptions, xml2js, Xml2JsFn } from '../common/parse'
 import { EmsiStatus } from '../common/types'
 import { Context } from "./context";
 import { Event } from "./event";
@@ -45,8 +45,8 @@ export class Emsi {
             }}, options, fn )
     }
 
-    loadFromXml (xml: string): this {
-        const js = xml2js(xml)
+    loadFromXml (xml: string, options?: ParseOptions, fn?: Xml2JsFn): this {
+        const js = xml2js(xml, options, fn)
         if (js) {
             Object.assign(this, js.emsi)
         }
