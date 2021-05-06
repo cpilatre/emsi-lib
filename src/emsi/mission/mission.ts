@@ -67,7 +67,7 @@ export class Mission {
         return this
     }
 
-    setendTime (end: Date): this {
+    setEndTime (end: Date): this {
         this.endTime = end.toISOString()
         return this
     }

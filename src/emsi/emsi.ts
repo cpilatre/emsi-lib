@@ -47,8 +47,13 @@ export class Emsi {
 
     loadFromXml (xml: string, options?: ParseOptions, fn?: Xml2JsFn): this {
         const js = xml2js(xml, options, fn)
-        if (js) {
-            Object.assign(this, js.emsi)
+        if (js?.emsi) {
+
+            if (js.emsi.context) {
+                this.context = Context.default().assign(js.emsi.context)
+            }
+
+            //Object.assign(this, js.emsi)
         }
         return this
     }

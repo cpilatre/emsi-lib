@@ -1,12 +1,13 @@
-import { v4 } from 'uuid'
+import { stringify, v4 } from 'uuid'
 import { ContextId, Datime, FreeText, Level, Mode, MsgType, SeClass, Urgency } from '../../common/types'
 import { MAX_FREETEXT_LENGTH, MAX_ID_LENGTH } from '../../common/config'
 import { ContextError } from '../../error'
 import { ExternalInfo } from './external-info'
 import { Link } from './link'
 import { Origin } from './origin'
+import { Default } from '../../common/parse'
 
-export class Context {
+export class Context extends Default {
     id: ContextId
     mode: Mode
     msgType: MsgType
@@ -21,6 +22,7 @@ export class Context {
 
     constructor (mode: Mode, msgType: MsgType, id?: ContextId, creation?: Date) {
         ContextError.checkLength(id, MAX_ID_LENGTH)
+        super()
         this.id = id  || v4()
         this.mode = mode
         this.msgType = msgType
@@ -65,5 +67,27 @@ export class Context {
             this.externalInfo = new Array<ExternalInfo>()
         this.externalInfo.push(...externals)
         return this
+    }
+
+    assign (source: Record<string, any>): this {
+        this.id = source['id']
+        this.mode = source['mode']
+        this.msgType = source['msgType']
+        this.creation = source['creation']
+        if (source['link']) {
+            this.link = new Array<Link>()
+            source['link'].forEach((add: Record<string, any>) => this.link?.push(Link.default().assign(add)))
+        }
+        this.level = source['level']
+        this.seClass = source['seClass']
+        this.freeText = source['freeText']
+        this.urgency = source['urgency']
+        //this.origin
+        //this.externalInfo
+        return this
+    }
+
+    static default (): Context {
+        return new Context(Mode.SYSTEM, MsgType.ERROR, undefined)
     }
 }

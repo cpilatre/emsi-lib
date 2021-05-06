@@ -14,7 +14,7 @@ export class Position {
 
     constructor (locId?: LocId, name?: Name, type?: PositionType) {
         if (!locId && !name && !type)
-            throw new PositionError(`All first level elements of 'Position' are optional, but at least on should be provided.`)
+            throw new PositionError(`All first level elements of 'Position' are optional, but at least one should be provided.`)
 
         this.locId = locId
         this.name = name

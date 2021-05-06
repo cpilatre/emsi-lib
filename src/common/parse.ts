@@ -1,6 +1,12 @@
 import he from 'he'
 import { j2xParser, parse, validate } from 'fast-xml-parser'
 
+export class Default {
+    static default(): any {
+        throw new Error('Not implemented !')
+    }
+}
+
 export type ParseOptions = Record<string, unknown>
 export type Js2XmlFn = (node: unknown, options?: ParseOptions) => string
 export type Xml2JsFn = (xml: string, options?: ParseOptions) => Record<string, unknown> | undefined
@@ -42,7 +48,7 @@ function defaultJs2Xml  (node: unknown, options?: ParseOptions): string {
     return xml
 }
 
-export function xml2js (xml: string, options?: ParseOptions, fn?: Xml2JsFn): Record<string, unknown> | undefined {
+export function xml2js (xml: string, options?: ParseOptions, fn?: Xml2JsFn): Record<string, any> | undefined {
     return (fn || defaultXml2js)(xml, options)
 }
 
