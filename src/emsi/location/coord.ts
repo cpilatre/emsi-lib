@@ -1,7 +1,8 @@
+import { Default } from "../../common/default"
 import { Height, Latitude, Longitude } from "../../common/types";
 import { PositionError } from "../../error";
 
-export class Coord {
+export class Coord extends Default {
     lat: Latitude 
     lon: Longitude 
     height?: Height
@@ -12,8 +13,29 @@ export class Coord {
         if (lon < -180 || lon > 180)
             throw new PositionError('Longitude must be between -180 and +180 degrees')
 
+        super()
         this.lat = lat
         this.lon = lon
         this.height = height
+    }
+
+    default (): Coord {
+        return new Coord(0, 0)
+    }
+
+    assign (source: Record<string, any>): this {
+        let key
+        const keys = Object.keys(source)
+
+        if ((key = keys.find(f => f === 'lat')))
+            this.lat = source[key]
+
+        if ((key = keys.find(f => f === 'lon')))
+            this.lon = source[key]
+
+        if ((key = keys.find(f => f === 'height')))
+            this.height = source[key]
+
+        return this
     }
 }

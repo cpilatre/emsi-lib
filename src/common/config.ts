@@ -10,3 +10,4 @@ export const MAX_URI_LENGTH = 200
 export const MAX_DETAIL_LENGTH = 200
 export const MAX_ADDRESS_LENGTH = 256
 export const COORDSYS = 'EPSG-4326'
+export const NULL_UUID = '00000000-0000-0000-0000-000000000000'

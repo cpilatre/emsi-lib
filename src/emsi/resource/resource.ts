@@ -1,11 +1,12 @@
 import { MAX_FREETEXT_LENGTH, MAX_ID_LENGTH, MAX_NAME_LENGTH, MAX_RESOURCE_ID_LENGTH } from "../../common/config"
+import { Default } from "../../common/default"
 import { FreeText, Name, Nationality, OrgId, Quantity, ResourceId, ResourceStatus, UnitOfMeasure } from "../../common/types"
 import { ResourceError } from "../../error/resource.error"
 import { Contact } from "./contact"
 import { RGeo } from "./resource-geo"
 import { RType } from "./resource-type"
 
-export class Resource {
+export class Resource extends Default {
     rtype: Array<RType>
     id?: ResourceId
     orgId?: OrgId
@@ -22,6 +23,7 @@ export class Resource {
         if (rtypes.length === 0)
             throw new ResourceError('Description of resource is required')
         ResourceError.checkLength(id, MAX_RESOURCE_ID_LENGTH)
+        super()
         this.rtype = rtypes
         this.id = id 
     }
@@ -77,4 +79,47 @@ export class Resource {
         this.contact.push(...contacts)
         return this
     }
+
+    assign(source: Record<string, any>): this {
+        let key
+        const keys = Object.keys(source)
+
+        if ((key = keys.find(f => f === 'id')))
+            this.id = source[key]
+        
+        if ((key = keys.find(f => f === 'orgId')))
+            this.orgId = source[key]
+
+        if ((key = keys.find(f => f === 'name')))
+            this.name = source[key]
+
+        if ((key = keys.find(f => f === 'quantity')))
+            this.quantity = source[key]
+
+        if ((key = keys.find(f => f === 'um')))
+            this.um = source[key]
+
+        if ((key = keys.find(f => f === 'freeText')))
+            this.freeText = source[key]
+
+        if ((key = keys.find(f => f === 'status')))
+            this.status = source[key]
+
+        if ((key = keys.find(f => f === 'nationality')))
+            this.nationality = source[key]
+
+// TODO 
+
+        return this
+    }
 }
+
+/*
+    rtype: Array<RType>
+
+
+    rGeo?: Array<RGeo>
+
+
+    contact?: Array<Contact>
+*/

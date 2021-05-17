@@ -1,12 +1,6 @@
 import he from 'he'
 import { j2xParser, parse, validate } from 'fast-xml-parser'
 
-export class Default {
-    static default(): any {
-        throw new Error('Not implemented !')
-    }
-}
-
 export type ParseOptions = Record<string, unknown>
 export type Js2XmlFn = (node: unknown, options?: ParseOptions) => string
 export type Xml2JsFn = (xml: string, options?: ParseOptions) => Record<string, unknown> | undefined
@@ -23,8 +17,8 @@ const options2js = {
     ignoreAttributes : true,
     ignoreNameSpace : true,
     allowBooleanAttributes : false,
-    parseNodeValue : true,
-    parseAttributeValue : false,
+    parseNodeValue : false,
+    parseAttributeValue : false, // Change this value to true do error whith he encoding
     trimValues: true,
     parseTrueNumberOnly: false,
     arrayMode: false, 
