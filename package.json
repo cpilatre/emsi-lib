@@ -1,6 +1,6 @@
 {
   "name": "emsi-lib",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -16,8 +16,8 @@
   "files": [
     "lib"
   ],
-  "keywords": [],
-  "author": "",
+  "keywords": ["EMSI", "EMERGENCY", "TSO", "ISO", "TR 22351:2015"],
+  "author": "Claude Pilatre",
   "license": "ISC",
   "publishConfig": {
     "access": "public"

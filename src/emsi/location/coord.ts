@@ -19,11 +19,11 @@ export class Coord extends Default {
         this.height = height
     }
 
-    default (): Coord {
+    static default(): Coord {
         return new Coord(0, 0)
     }
 
-    assign (source: Record<string, any>): this {
+    assign(source: Record<string, any>): this {
         let key
         const keys = Object.keys(source)
 

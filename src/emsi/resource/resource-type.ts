@@ -1,4 +1,4 @@
-import { MAX_OTHER_LENGTH } from "../../common/config"
+import { MAX_RTYPE_LENGTH } from "../../common/config"
 import { Default } from "../../common/default"
 import { Capability, Characteristics, Class } from "../../common/types"
 import { ResourceError } from "../../error/resource.error"
@@ -9,13 +9,13 @@ export class RType extends Default {
     characteristics?: Array<Characteristics>
 
     constructor(classes: Class[]) {
-        classes.forEach((add: string) => ResourceError.checkLength(add, MAX_OTHER_LENGTH))
+        classes.forEach((add: string) => ResourceError.checkLength(add, MAX_RTYPE_LENGTH))
         super()
         this.class = classes
     }
 
     addCapability(capabilities: Capability[]): this {
-        capabilities.forEach((add: string) => ResourceError.checkLength(add, MAX_OTHER_LENGTH))
+        capabilities.forEach((add: string) => ResourceError.checkLength(add, MAX_RTYPE_LENGTH))
 
         if (!this.capability)
             this.capability = new Array<Capability>()
@@ -24,7 +24,7 @@ export class RType extends Default {
     }
 
     addCharacteristics(characteristics: Characteristics[]): this {
-        characteristics.forEach((add: string) => ResourceError.checkLength(add, MAX_OTHER_LENGTH))
+        characteristics.forEach((add: string) => ResourceError.checkLength(add, MAX_RTYPE_LENGTH))
 
         if (!this.characteristics)
             this.characteristics = new Array<Characteristics>()
@@ -32,7 +32,7 @@ export class RType extends Default {
         return this
     }
 
-    default(): RType {
+    static default(): RType {
         return new RType([''])
     }
 

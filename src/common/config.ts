@@ -1,10 +1,12 @@
 export const MAX_ID_LENGTH = 40
 export const MAX_NAME_LENGTH = 40
+export const MAX_NAME_X2_LENGTH = 80
 export const MAX_WEATHER_LENGTH = 40
 export const MAX_LOC_ID_LENGTH = 80
 export const MAX_RESOURCE_ID_LENGTH = 80
-export const MAX_OTHER_LENGTH = 80
+export const MAX_USER_ID_LENGTH = 80
 export const MAX_ETYPE_LENGTH = 80
+export const MAX_RTYPE_LENGTH = 80
 export const MAX_FREETEXT_LENGTH = 500
 export const MAX_URI_LENGTH = 200
 export const MAX_DETAIL_LENGTH = 200

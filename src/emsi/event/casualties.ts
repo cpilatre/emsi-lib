@@ -9,7 +9,7 @@ export class Casualties extends Default {
     count: Count
     informations?: Informations
 
-    constructor (context: CasualtiesContext, count: Count, datime?: Date) {
+    constructor(context: CasualtiesContext, count: Count, datime?: Date) {
         if (count < 0)
             throw new EventError('Count should be positive')
         super()
@@ -18,12 +18,12 @@ export class Casualties extends Default {
         this.datime = (datime || new Date()).toISOString()
     }
 
-    setInformations (informations: Informations): this {
+    setInformations(informations: Informations): this {
         this.informations = informations
         return this
     }
 
-    default (): Casualties {
+    static default(): Casualties {
         return new Casualties(CasualtiesContext.INITIAL_STATEMENT, 0)
     }
 

@@ -1,4 +1,4 @@
-import { MAX_WEATHER_LENGTH, MAX_OTHER_LENGTH, MAX_FREETEXT_LENGTH, MAX_ID_LENGTH } from "../../common/config";
+import { MAX_WEATHER_LENGTH, MAX_ETYPE_LENGTH, MAX_FREETEXT_LENGTH, MAX_ID_LENGTH } from "../../common/config";
 import { Default } from "../../common/default"
 import { Datime, EGeoId, EGeoStatus, EGeoType, FreeText, Weather } from "../../common/types";
 import { EventError } from "../../error";
@@ -14,7 +14,7 @@ export class EGeo extends Default {
     status?: EGeoStatus
 
     constructor(type: EGeoType, position?: Position) {
-        EventError.checkLength(type, MAX_OTHER_LENGTH)
+        EventError.checkLength(type, MAX_ETYPE_LENGTH)
 
         super()
         this.type = type

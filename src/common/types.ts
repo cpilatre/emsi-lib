@@ -24,16 +24,16 @@ export type Category = string
 export type Actor = string
 export type LocType = string
 export type Env = string
-export type Source = 'COMFOR' | 'HUMDED' | 'HUMOBS' | 'SENSOR'
+export enum Source { COMPUTER_FORECAST = 'COMFOR', HUMAN_DEDUCTION = 'HUMDED', HUMAN_OBSERVATION = 'HUMOBS', SENSOR_OBSERVATION = 'SENSOR' }
 export enum Scale { LEVEL_1 = '1', LEVEL_2  = '2', LEVEL_3 = '3', LEVEL_4 = '4', LEVEL_5  = '5' }
 export type Certainly = number
-export type Status = 'COM' | 'IPR' | 'NST' | 'STOP'
-export type RiskAssessmnt = 'INCREA' | 'DECREA' | 'STABLE'
-export type Cause = 'ACC' | 'DEL' | 'NAT'
+export enum Status { EVENT_COMPLETE = 'COM', EVENT_IN_PROGRESS = 'IPR', EVENT_NOT_STARTED = 'NST', EVENT_UNDER_CONTROL = 'STOP' }
+export enum RiskAssessmnt { INCREASING = 'INCREA', DECREASING = 'DECREA', STABLE = 'STABLE' }
+export enum Cause { ACCIDENTAL = 'ACC', DELIBERATE = 'DEL', NATURAL = 'NAT' }
 export type EGeoType = string
 export type Weather = string
 export type EGeoId = string
-export type EGeoStatus = 'PLANNED' | 'IN PLACE' | 'GONE'
+export enum EGeoStatus { PLANNED = 'PLANNED', INPLACE = 'IN PLACE', GONE = 'GONE' }
 
 // Casualties types
 export type Count = number

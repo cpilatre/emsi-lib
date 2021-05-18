@@ -11,31 +11,31 @@ export class Emsi {
     mission?: Array<Mission>
     resource?: Array<Resource>
     
-    setContext (context: Context): this {
+    setContext(context: Context): this {
         this.context = context
         return this 
     }
 
-    setEvent (event: Event): this {
+    setEvent(event: Event): this {
         this.event = event
         return this 
     }
 
-    addMissions (missions: Mission[]): this {
+    addMissions(missions: Mission[]): this {
         if (!this.mission)
             this.mission = new Array<Mission>()
         this.mission.push(...missions)
         return this
     }
 
-    addResources (resources: Resource[]): this {
+    addResources(resources: Resource[]): this {
         if (!this.resource)
             this.resource = new Array<Resource>()
         this.resource.push(...resources)
         return this
     }
 
-    generateXml (options?: ParseOptions, fn?: Js2XmlFn): string {
+    generateXml(options?: ParseOptions, fn?: Js2XmlFn): string {
         return js2xml(
             { emsi: {
                 context: this.context,
@@ -45,7 +45,7 @@ export class Emsi {
             }}, options, fn)
     }
 
-    loadFromXml (xml: string, options?: ParseOptions, fn?: Xml2JsFn): this {
+    loadFromXml(xml: string, options?: ParseOptions, fn?: Xml2JsFn): this {
         const js = xml2js(xml, options, fn)
 
         if (js?.emsi) {
@@ -57,12 +57,28 @@ export class Emsi {
             if (js.emsi.event) {
                 this.event = Event.default().assign(js.emsi.event)
             }
+
+            if (js.emsi.mission) {
+                this.mission = new Array<Mission>()
+                if (js.emsi.mission instanceof Array)
+                    js.emsi.mission.forEach((add: Record<string, any>) => this.mission?.push(Mission.default().assign(add)))
+                else 
+                    this.mission.push(Mission.default().assign(js.emsi.mission))
+            }
+
+            if (js.emsi.resource) {
+                this.resource = new Array<Resource>()
+                if (js.emsi.mission instanceof Array)
+                    js.emsi.mission.forEach((add: Record<string, any>) => this.resource?.push(Resource.default().assign(add)))
+                else 
+                    this.resource.push(Resource.default().assign(js.emsi.mission))
+            }
         }
 
         return this
     }
 
-    checkStatus (): EmsiStatus {
+    checkStatus(): EmsiStatus {
         if (!this.context || !this.event)
             return EmsiStatus.PARTIAL
 

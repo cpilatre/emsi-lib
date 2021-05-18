@@ -1,5 +1,5 @@
 import { v4 } from "uuid"
-import { MAX_FREETEXT_LENGTH, MAX_ID_LENGTH, MAX_OTHER_LENGTH, MAX_RESOURCE_ID_LENGTH } from "../../common/config"
+import { MAX_FREETEXT_LENGTH, MAX_ID_LENGTH, MAX_NAME_X2_LENGTH, MAX_RESOURCE_ID_LENGTH } from "../../common/config"
 import { Default } from "../../common/default"
 import { Datime, FreeText, MainMissionId, MissionId, MissionPriority, MissionStatus, MissionType, Name, OrgId, ResourceId } from "../../common/types"
 import { MissionError } from "../../error"
@@ -47,7 +47,7 @@ export class Mission extends Default {
     }
 
     setName (name: Name): this {
-        MissionError.checkLength(name, MAX_OTHER_LENGTH)
+        MissionError.checkLength(name, MAX_NAME_X2_LENGTH)
         this.name = name
         return this
     }
@@ -111,11 +111,11 @@ export class Mission extends Default {
         return this
     }
 
-    default (): Mission {
+    static default(): Mission {
         return new Mission('')
     }
 
-    assign (source: Record<string, any>): this {
+    assign(source: Record<string, any>): this {
         let key
         const keys = Object.keys(source)
 

@@ -8,36 +8,36 @@ export class Informations extends Default {
     location?: Location
     health?: Health
 
-    constructor (status: CasualtiesStatus) {
+    constructor(status: CasualtiesStatus) {
         super()
         this.status = status
     }
 
-    setTriage (triage: Triage): this {
+    setTriage(triage: Triage): this {
         this.triage = triage
         return this
     }
 
-    setContamination (contamination: Contamination): this {
+    setContamination(contamination: Contamination): this {
         this.contamination = contamination
         return this
     }
 
-    setLocation (location: Location): this {
+    setLocation(location: Location): this {
         this.location = location
         return this
     }
 
-    setHealth (health: Health): this {
+    setHealth(health: Health): this {
         this.health = health
         return this
     }
 
-    default (): Informations {
+    static default(): Informations {
         return new Informations(CasualtiesStatus.UNKNOWN)
     }
 
-    assign (source: Record<string, any>): this {
+    assign(source: Record<string, any>): this {
         let key
         const keys = Object.keys(source)
 

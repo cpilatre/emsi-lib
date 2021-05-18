@@ -7,7 +7,7 @@ import { RGeo } from "./resource-geo"
 import { RType } from "./resource-type"
 
 export class Resource extends Default {
-    rtype: Array<RType>
+    rType: Array<RType>
     id?: ResourceId
     orgId?: OrgId
     name?: Name
@@ -19,12 +19,12 @@ export class Resource extends Default {
     nationality?: Nationality
     contact?: Array<Contact>
 
-    constructor (rtypes: RType[], id?: ResourceId) {
-        if (rtypes.length === 0)
+    constructor (rTypes: RType[], id?: ResourceId) {
+        if (rTypes.length === 0)
             throw new ResourceError('Description of resource is required')
         ResourceError.checkLength(id, MAX_RESOURCE_ID_LENGTH)
         super()
-        this.rtype = rtypes
+        this.rType = rTypes
         this.id = id 
     }
 
@@ -80,6 +80,10 @@ export class Resource extends Default {
         return this
     }
 
+    static default(): Resource {
+        return new Resource([RType.default()])
+    }
+
     assign(source: Record<string, any>): this {
         let key
         const keys = Object.keys(source)
@@ -108,18 +112,30 @@ export class Resource extends Default {
         if ((key = keys.find(f => f === 'nationality')))
             this.nationality = source[key]
 
-// TODO 
+        if ((key = keys.find(f => f === 'rType'))) {
+            this.rType = new Array<RType>()
+            if (source[key] instanceof Array)
+                source[key].forEach((add: Record<string, any>) => this.rType?.push(RType.default().assign(add)))
+            else 
+                this.rType.push(RType.default().assign([key]))
+        }   
+        
+        if ((key = keys.find(f => f === 'rGeo'))) {
+            this.rGeo = new Array<RGeo>()
+            if (source[key] instanceof Array)
+                source[key].forEach((add: Record<string, any>) => this.rGeo?.push(RGeo.default().assign(add)))
+            else 
+                this.rGeo.push(RGeo.default().assign([key]))
+        }   
 
+        if ((key = keys.find(f => f === 'contact'))) {
+            this.contact = new Array<Contact>()
+            if (source[key] instanceof Array)
+                source[key].forEach((add: Record<string, any>) => this.contact?.push(Contact.default().assign(add)))
+            else 
+                this.contact.push(Contact.default().assign([key]))
+        }   
+        
         return this
     }
 }
-
-/*
-    rtype: Array<RType>
-
-
-    rGeo?: Array<RGeo>
-
-
-    contact?: Array<Contact>
-*/

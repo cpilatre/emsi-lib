@@ -45,11 +45,11 @@ export class Position extends Default {
         return this
     }
 
-    default (): Position {
+    static default(): Position {
         return new Position(NULL_UUID)
     }
 
-    assign (source: Record<string, any>): this {
+    assign(source: Record<string, any>): this {
         let key
         const keys = Object.keys(source)
 

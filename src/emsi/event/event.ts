@@ -1,6 +1,6 @@
 import { v4 } from 'uuid'
 import { Status, Certainly, Datime, EventId, Name, Scale, Source, RiskAssessmnt, Cause, FreeText } from '../../common/types'
-import { MAX_FREETEXT_LENGTH, MAX_ID_LENGTH, MAX_OTHER_LENGTH, NULL_UUID } from '../../common/config'
+import { MAX_FREETEXT_LENGTH, MAX_ID_LENGTH, MAX_NAME_LENGTH, NULL_UUID } from '../../common/config'
 import { EGeo } from './event-geo'
 import { EType } from './event-type'
 import { Reference } from './reference'
@@ -29,7 +29,7 @@ export class Event extends Default {
 
     constructor (id?: EventId, name?: Name, mainEventId?: EventId) {
         EventError.checkLength(id, MAX_ID_LENGTH)
-        EventError.checkLength(name, MAX_OTHER_LENGTH)
+        EventError.checkLength(name, MAX_NAME_LENGTH)
         EventError.checkLength(mainEventId, MAX_ID_LENGTH)
 
         super()
