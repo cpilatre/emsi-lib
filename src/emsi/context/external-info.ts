@@ -4,7 +4,6 @@ import { FreeText, InfoType, URI } from "../../common/types";
 import { ContextError } from "../../error";
 
 export class ExternalInfo extends Default {
-
     uri: URI
     infoType?: InfoType
     freeText?: FreeText
@@ -34,7 +33,7 @@ export class ExternalInfo extends Default {
         return this
     }   
 
-    static default (): ExternalInfo {
+    static default(): ExternalInfo {
         return new ExternalInfo('http://')
     }
 }
