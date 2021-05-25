@@ -5,7 +5,8 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --recursive -r ts-node/register \"test/**/*.test.ts\"",
+    "coverage": "nyc yarn run test",
     "build": "tsc",
     "build:check": "tsc --noEmit"
   },
@@ -16,7 +17,13 @@
   "files": [
     "lib"
   ],
-  "keywords": ["EMSI", "EMERGENCY", "TSO", "ISO", "TR 22351:2015"],
+  "keywords": [
+    "EMSI",
+    "EMERGENCY",
+    "TSO",
+    "ISO",
+    "TR 22351:2015"
+  ],
   "author": "Claude Pilatre",
   "license": "ISC",
   "publishConfig": {
@@ -27,12 +34,17 @@
   },
   "homepage": "https://github.com/cpilatre/emsi-lib#readme",
   "devDependencies": {
+    "@types/chai": "^4.2.18",
     "@types/he": "^1.1.1",
+    "@types/mocha": "^8.2.2",
     "@types/node": "^15.0.1",
     "@types/uuid": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
+    "chai": "^4.3.4",
     "eslint": "^7.25.0",
+    "mocha": "^8.4.0",
+    "nyc": "^15.1.0",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4"
   },
