@@ -1,4 +1,8 @@
 # emsi-lib
+
+[![Build Status](https://github.com/cpilatre/emsi-lib/actions/workflows/build.yml/badge.svg)](https://github.com/cpilatre/emsi-lib/actions?query=workflow%3A%22build%22)
+[![Build Status](https://github.com/cpilatre/emsi-lib/actions/workflows/test.yml/badge.svg)](https://github.com/cpilatre/emsi-lib/actions?query=workflow%3A%22test%22)
+
 A EMSI (Emergency Management Shared Information) object model to manipulate emergency messages defined in ISO/TR 22351 document.
 
 ## Main features
