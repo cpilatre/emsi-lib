@@ -18,7 +18,7 @@ const extInfo = new ExternalInfo("https://secourir.eu/.../", InfoType.PHOTO, "Ph
 const origin = new Origin("43d38170-ce5d-4d8e-81d7-2bd4071d83f4", "58113", "SC/SDIS24")
 
 const context = new Context(Mode.ACTUAL, MsgType.ALERT)
-    .setFreeText("Firs message")
+    .setFreeText("First message")
     .setLevel(Level.TACTICAL)
     .setSecurityClassification(SeClass.RESTRICTED)
     .setUrgency(Urgency.URGENT)
