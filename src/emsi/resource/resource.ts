@@ -46,7 +46,7 @@ export class Resource extends Default {
         return this
     }   
 
-    addResourceGeo (rgeos: RGeo[]): this {
+    addResourceGeos (rgeos: RGeo[]): this {
         if (!this.rGeo)
             this.rGeo = new Array<RGeo>()
         this.rGeo.push(...rgeos)
@@ -80,11 +80,11 @@ export class Resource extends Default {
         return this
     }
 
-    static default(): Resource {
+    static default (): Resource {
         return new Resource([RType.default()])
     }
 
-    assign(source: Record<string, any>): this {
+    assign (source: Record<string, any>): this {
         let key
         const keys = Object.keys(source)
 

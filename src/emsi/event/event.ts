@@ -65,7 +65,7 @@ export class Event extends Default {
         return this
     }
 
-    setOcclDatime (occ: Datime): this {
+    setOccDatime (occ: Datime): this {
         this.occDatime = occ
         return this
     }
@@ -85,21 +85,21 @@ export class Event extends Default {
         return this
     }
 
-    addReference (references: Reference[]): this {
+    addReferences (references: Reference[]): this {
         if (!this.reference) 
             this.reference = new Array<Reference>()
         this.reference.push(...references)
         return this
     }
 
-    addCasualities (casualties: Casualties[]): this {
+    addCasualties (casualties: Casualties[]): this {
         if (!this.casualties) 
             this.casualties = new Array<Casualties>()
         this.casualties.push(...casualties)
         return this
     }
 
-    addEventGeo (eGeo: EGeo[]): this {
+    addEventGeos (eGeo: EGeo[]): this {
         if (!this.eGeo) 
             this.eGeo = new Array<EGeo>()
         this.eGeo.push(...eGeo)

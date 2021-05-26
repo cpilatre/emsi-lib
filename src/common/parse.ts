@@ -29,7 +29,7 @@ export function js2xml (node: unknown, options?: ParseOptions, fn?: Js2XmlFn): s
     return (fn || defaultJs2Xml)(node, options)
 }
 
-function defaultJs2Xml  (node: unknown, options?: ParseOptions): string {
+function defaultJs2Xml (node: unknown, options?: ParseOptions): string {
     const p2xml = new j2xParser({ ...options2xml, ...options })
     let xml = p2xml.parse(node)
 

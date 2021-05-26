@@ -29,7 +29,7 @@ export class Context extends Default {
         this.creation = (creation || new Date()).toISOString()
     }
 
-    addLink (links: Link[]): this {
+    addLinks (links: Link[]): this {
         if (!this.link)
             this.link = new Array<Link>()
         this.link.push(...links)
@@ -62,7 +62,7 @@ export class Context extends Default {
         return this
     }
 
-    addExternalInfo (externals: ExternalInfo[]): this {
+    addExternalInfos (externals: ExternalInfo[]): this {
         if (!this.externalInfo)
             this.externalInfo = new Array<ExternalInfo>()
         this.externalInfo.push(...externals)

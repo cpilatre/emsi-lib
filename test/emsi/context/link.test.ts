@@ -17,13 +17,8 @@ describe('emsi :: context', () => {
 
         it('Assign data to object', () => {
             const link = Link.default().assign(src)
-            expect(link).to.have.property('linkId')
-            expect(link).to.have.property('linkRole')
-        })
-
-        it('Chek enum assignement', () => {
-            const link = Link.default().assign(src)
-            expect(link.linkRole).eq(LinkRole.ADD_TO)
+            expect(link).to.have.property('linkId', NULL_UUID)
+            expect(link).to.have.property('linkRole', LinkRole.ADD_TO)
         })
     })
 })

@@ -11,7 +11,7 @@ export class RGeo extends Default {
     position?: Position
     id?: RGeoId
 
-    constructor(type: RGeoType, position?: Position) {
+    constructor (type: RGeoType, position?: Position) {
         EventError.checkLength(type, MAX_RTYPE_LENGTH)
 
         super()
@@ -19,33 +19,33 @@ export class RGeo extends Default {
         this.position = position
     }
 
-    setDatime(datime: Datime): this {
+    setDatime (datime: Datime): this {
         this.datime = datime
         return this
     }
 
-    addWeather(weathers: Weather[]): this {
+    addWeather (weathers: Weather[]): this {
         weathers.forEach(weather => EventError.checkLength(weather, MAX_WEATHER_LENGTH))
         return this
     }
 
-    setFreeText(freeText?: FreeText): this {
+    setFreeText (freeText?: FreeText): this {
         EventError.checkLength(freeText, MAX_FREETEXT_LENGTH)
         this.freeText = freeText
         return this
     }    
 
-    setId(id: RGeoId): this {
+    setId (id: RGeoId): this {
         EventError.checkLength(id, MAX_ID_LENGTH)
         this.id = id
         return this
     }
 
-    static default(): RGeo {
+    static default (): RGeo {
         return new RGeo('')
     }
 
-    assign(source: Record<string, any>): this {
+    assign (source: Record<string, any>): this {
         let key
         const keys = Object.keys(source)
 

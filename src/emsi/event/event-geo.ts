@@ -13,46 +13,48 @@ export class EGeo extends Default {
     id?: EGeoId
     status?: EGeoStatus
 
-    constructor(type: EGeoType, position?: Position) {
+    constructor (type: EGeoType, position?: Position) {
         EventError.checkLength(type, MAX_ETYPE_LENGTH)
-
         super()
         this.type = type
         this.position = position
     }
 
-    setDatime(datime: Datime): this {
+    setDatime (datime: Datime): this {
         this.datime = datime
         return this
     }
 
-    addWeather(weathers: Weather[]): this {
+    addWeather (weathers: Weather[]): this {
         weathers.forEach(weather => EventError.checkLength(weather, MAX_WEATHER_LENGTH))
+        if (!this.weather)
+            this.weather = new Array<Weather>()
+        this.weather.push(...weathers)
         return this
     }
 
-    setFreeText(freeText?: FreeText): this {
+    setFreeText (freeText?: FreeText): this {
         EventError.checkLength(freeText, MAX_FREETEXT_LENGTH)
         this.freeText = freeText
         return this
     }    
 
-    setId(id: EGeoId): this {
+    setId (id: EGeoId): this {
         EventError.checkLength(id, MAX_ID_LENGTH)
         this.id = id
         return this
     }
 
-    setStatus(status: EGeoStatus): this {
+    setStatus (status: EGeoStatus): this {
         this.status = status
         return this
     }
 
-    static default(): EGeo {
+    static default (): EGeo {
         return new EGeo('')
     }
 
-    assign(source: Record<string, any>): this {
+    assign (source: Record<string, any>): this {
         let key
         const keys = Object.keys(source)
 

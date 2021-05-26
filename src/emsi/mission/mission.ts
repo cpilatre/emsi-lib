@@ -74,7 +74,7 @@ export class Mission extends Default {
         return this
     }
 
-    addResourceId (resourceIds: ResourceId[]): this {
+    addResourceIds (resourceIds: ResourceId[]): this {
         resourceIds.forEach(add => MissionError.checkLength(add, MAX_RESOURCE_ID_LENGTH))
 
         if (!this.resourceId)
@@ -83,7 +83,7 @@ export class Mission extends Default {
         return this
     }
 
-    addParentMissionId (parentIds: MissionId[]): this {
+    addParentMissionIds (parentIds: MissionId[]): this {
         parentIds.forEach(add => MissionError.checkLength(add, MAX_ID_LENGTH))
 
         if (!this.parentMissionId)
@@ -92,7 +92,7 @@ export class Mission extends Default {
         return this
     }
 
-    addChildMissionId (childIds: MissionId[]): this {
+    addChildMissionIds (childIds: MissionId[]): this {
         childIds.forEach(add => MissionError.checkLength(add, MAX_ID_LENGTH))
 
         if (!this.childMissionId)
