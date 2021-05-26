@@ -125,6 +125,9 @@ export class Mission extends Default {
         if ((key = keys.find(f => f === 'freeText')))
             this.freeText = source[key]
 
+        if ((key = keys.find(f => f === 'id')))
+            this.id = source[key]            
+
         if ((key = keys.find(f => f === 'mainMissionId')))
             this.mainMissionId = source[key]
 
@@ -142,6 +145,14 @@ export class Mission extends Default {
 
         if ((key = keys.find(f => f === 'endTime')))
             this.endTime = source[key]
+
+        if ((key = keys.find(f => f === 'resourceId'))) {
+            this.resourceId = new Array<ResourceId>()
+            if (source[key] instanceof Array)
+                source[key].forEach((add: string) => this.resourceId?.push(add))
+            else 
+                this.resourceId.push(source[key])
+        }     
 
         if ((key = keys.find(f => f === 'parentMissionId'))) {
             this.parentMissionId = new Array<MissionId>()

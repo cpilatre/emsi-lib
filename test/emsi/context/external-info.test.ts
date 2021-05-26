@@ -3,7 +3,7 @@ import { MAX_FREETEXT_LENGTH, MAX_URI_LENGTH } from '../../../src/common/config'
 import { InfoType } from '../../../src/common/types'
 import { ExternalInfo } from '../../../src/emsi/context'
 
-describe('emsi :: context', () => {
+export default function (): any {
     describe('ExternalInfo', () => {
         const src = {
             uri: 'http://test.com',
@@ -31,4 +31,4 @@ describe('emsi :: context', () => {
             expect(exti.infoType).eq(InfoType.MAP)
         })
     })
-})
+}

@@ -2,7 +2,7 @@ import { expect } from 'chai'
 import { MAX_ID_LENGTH, MAX_NAME_X2_LENGTH, MAX_USER_ID_LENGTH, NULL_UUID } from '../../../src/common/config'
 import { Origin } from '../../../src/emsi/context'
 
-describe('emsi :: context', () => {
+export default function (): any {
     describe('Origin', () => {
         const src = {
             orgId: NULL_UUID,
@@ -28,4 +28,4 @@ describe('emsi :: context', () => {
             expect(origin).to.have.property('name')
         })
     })
-})
+}

@@ -3,7 +3,7 @@ import { MAX_ID_LENGTH, NULL_UUID } from '../../../src/common/config'
 import { LinkRole } from '../../../src/common/types'
 import { Link } from '../../../src/emsi/context'
 
-describe('emsi :: context', () => {
+export default function (): any {
     describe('Link', () => {
         const src = {
             linkId: NULL_UUID,
@@ -21,4 +21,4 @@ describe('emsi :: context', () => {
             expect(link).to.have.property('linkRole', LinkRole.ADD_TO)
         })
     })
-})
+}

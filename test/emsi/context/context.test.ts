@@ -1,9 +1,18 @@
 import { expect } from 'chai'
-import { MAX_ID_LENGTH, NULL_UUID } from '../../../src/common/config'
+import { MAX_FREETEXT_LENGTH, MAX_ID_LENGTH, NULL_UUID } from '../../../src/common/config'
 import { InfoType, Level, LinkRole, Mode, MsgType, SeClass, Urgency } from '../../../src/common/types'
 import { Context, ExternalInfo, Link, Origin } from '../../../src/emsi/context'
+import test_link from './link.test'
+import test_externalInfo from './external-info.test'
+import test_origin from './origin.test'
 
 describe('emsi :: context', () => {
+    describe('Components', () => {
+        test_link()
+        test_externalInfo()
+        test_origin()
+    })
+    
     describe('Context', () => {
         const src = {
             id: NULL_UUID,
@@ -43,7 +52,19 @@ describe('emsi :: context', () => {
             ]
         }
 
-        it('Build object', () => {
+        it('Chek constructor', () => {
+            const context = () => new Context(Mode.ACTUAL, MsgType.ALERT, `x${'x'.repeat(MAX_ID_LENGTH)}`) 
+            expect(context).to.throw() 
+        })
+
+        it('Check set methods', () => {
+            const context = new Context(Mode.ACTUAL, MsgType.ALERT)
+
+            const freeTextLength = () => context.setFreeText(`x${'x'.repeat(MAX_FREETEXT_LENGTH)}`)
+            expect(freeTextLength).to.throw()
+        })
+
+        it('Compare build object and assigned object', () => {
             const link1 = new Link(NULL_UUID, LinkRole.ADD_TO)
             const link2 = new Link(NULL_UUID, LinkRole.SUPERSEDE)
             const info = new ExternalInfo('http://test.com', InfoType.MAP, 'Comments')
@@ -57,39 +78,8 @@ describe('emsi :: context', () => {
                 .setOrigin(new Origin(NULL_UUID, 'user', 'name'))
                 .addExternalInfos([info, info])
 
-            expect(context).eql(src)
-        })
-
-        it('Chek constructor', () => {
-            const context = () => new Context(Mode.ACTUAL, MsgType.ALERT, `x${'x'.repeat(MAX_ID_LENGTH)}`) 
-            expect(context).to.throw() 
-        })
-
-        it('Assign data to object', () => {
-            const context = Context.default().assign(src)
-            expect(context).to.have.property('id')
-            expect(context).to.have.property('mode')
-            expect(context).to.have.property('msgType')
-            expect(context).to.have.property('creation')
-            expect(context).to.have.property('link')
-            expect(context.link).to.have.lengthOf(2)
-            expect(context).to.have.property('level')
-            expect(context).to.have.property('seClass')
-            expect(context).to.have.property('freeText')
-            expect(context).to.have.property('urgency')
-            expect(context).to.have.property('origin')
-            expect(context.origin).to.have.property('name')
-            expect(context).to.have.property('externalInfo')
-            expect(context.externalInfo).to.have.lengthOf(2)
-        })
-
-        it('Chek enum assignement', () => {
-            const context = Context.default().assign(src)
-            expect(context.mode).eq(Mode.ACTUAL)
-            expect(context.msgType).eq(MsgType.ALERT)
-            expect(context.level).eq(Level.OPERATIONAL)
-            expect(context.seClass).eq(SeClass.CONFIDENTIAL)
-            expect(context.urgency).eq(Urgency.NOT_URGENT)
+            const dest = Context.default().assign(src)
+            expect(context).eql(dest)
         })
     })
 })
