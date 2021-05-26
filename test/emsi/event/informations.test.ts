@@ -2,7 +2,7 @@ import { expect } from 'chai'
 import { CasualtiesStatus, Contamination, Health, Location, Triage } from '../../../src/common/types'
 import { Informations } from '../../../src/emsi/event'
 
-describe('emsi :: event', () => {
+export default function (): any {
     describe('Informations', () => {
         const src = {
             status: 'CITIZEN',
@@ -12,22 +12,23 @@ describe('emsi :: event', () => {
             health: 'DEAD'
         }
 
-        it('Assign data to object', () => {
-            const informations = Informations.default().assign(src)
-            expect(informations).to.have.property('status')
-            expect(informations).to.have.property('triage')
-            expect(informations).to.have.property('contamination')
-            expect(informations).to.have.property('location')
-            expect(informations).to.have.property('health')
+        it('Build object', () => {
+            const informations = new Informations(CasualtiesStatus.CITIZEN)
+                .setTriage(Triage.BLACK)
+                .setContamination(Contamination.CONTAMINATION_NOT_ASSESSED)
+                .setLocation(Location.CONFINED)
+                .setHealth(Health.DEAD)
+
+            expect(informations).eql(src)
         })
 
-        it('Chek enum assignement', () => {
+        it('Assign data to object', () => {
             const informations = Informations.default().assign(src)
-            expect(informations.status).eq(CasualtiesStatus.CITIZEN)
-            expect(informations.triage).eq(Triage.BLACK)
-            expect(informations.contamination).eq(Contamination.CONTAMINATION_NOT_ASSESSED)
-            expect(informations.location).eq(Location.CONFINED)
-            expect(informations.health).eq(Health.DEAD)
+            expect(informations).to.have.property('status', CasualtiesStatus.CITIZEN)
+            expect(informations).to.have.property('triage', Triage.BLACK)
+            expect(informations).to.have.property('contamination', Contamination.CONTAMINATION_NOT_ASSESSED)
+            expect(informations).to.have.property('location', Location.CONFINED)
+            expect(informations).to.have.property('health', Health.DEAD)
         })
     })
-})
+}

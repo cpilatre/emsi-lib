@@ -65,7 +65,7 @@ export class Event extends Default {
         return this
     }
 
-    setOcclDatime (occ: Datime): this {
+    setOccDatime (occ: Datime): this {
         this.occDatime = occ
         return this
     }
@@ -92,7 +92,7 @@ export class Event extends Default {
         return this
     }
 
-    addCasualities (casualties: Casualties[]): this {
+    addCasualties (casualties: Casualties[]): this {
         if (!this.casualties) 
             this.casualties = new Array<Casualties>()
         this.casualties.push(...casualties)

@@ -1,7 +1,7 @@
 import { MAX_RTYPE_LENGTH } from "../../common/config"
 import { Default } from "../../common/default"
 import { Capability, Characteristics, Class } from "../../common/types"
-import { ResourceError } from "../../error/resource.error"
+import { ResourceError } from "../../error"
 
 export class RType extends Default {
     class: Array<Class>

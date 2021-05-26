@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import { MAX_ID_LENGTH, NULL_UUID } from '../../../src/common/config'
-import { Level, LinkRole, Mode, MsgType, SeClass, Urgency } from '../../../src/common/types'
-import { Context, Origin } from '../../../src/emsi/context'
+import { InfoType, Level, LinkRole, Mode, MsgType, SeClass, Urgency } from '../../../src/common/types'
+import { Context, ExternalInfo, Link, Origin } from '../../../src/emsi/context'
 
 describe('emsi :: context', () => {
     describe('Context', () => {
@@ -9,7 +9,7 @@ describe('emsi :: context', () => {
             id: NULL_UUID,
             mode: 'ACTUAL',
             msgType: 'ALERT',
-            creation: new Date().toISOString(),
+            creation: new Date(2021, 5, 1).toISOString(),
             link: [
                 {
                     linkId: NULL_UUID,
@@ -42,6 +42,23 @@ describe('emsi :: context', () => {
                 }
             ]
         }
+
+        it('Build object', () => {
+            const link1 = new Link(NULL_UUID, LinkRole.ADD_TO)
+            const link2 = new Link(NULL_UUID, LinkRole.SUPERSEDE)
+            const info = new ExternalInfo('http://test.com', InfoType.MAP, 'Comments')
+
+            const context = new Context(Mode.ACTUAL, MsgType.ALERT, NULL_UUID, new Date(2021, 5, 1))
+                .addLink([link1, link2])
+                .setLevel(Level.OPERATIONAL)
+                .setSecurityClassification(SeClass.CONFIDENTIAL)
+                .setFreeText('Comments')
+                .setUrgency(Urgency.NOT_URGENT)
+                .setOrigin(new Origin(NULL_UUID, 'user', 'name'))
+                .addExternalInfo([info, info])
+
+            expect(context).eql(src)
+        })
 
         it('Chek constructor', () => {
             const context = () => new Context(Mode.ACTUAL, MsgType.ALERT, `x${'x'.repeat(MAX_ID_LENGTH)}`) 

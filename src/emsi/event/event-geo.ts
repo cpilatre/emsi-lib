@@ -28,6 +28,9 @@ export class EGeo extends Default {
 
     addWeather(weathers: Weather[]): this {
         weathers.forEach(weather => EventError.checkLength(weather, MAX_WEATHER_LENGTH))
+        if (!this.weather)
+            this.weather = new Array<Weather>()
+        this.weather.push(...weathers)
         return this
     }
 
