@@ -49,13 +49,13 @@ describe('emsi :: context', () => {
             const info = new ExternalInfo('http://test.com', InfoType.MAP, 'Comments')
 
             const context = new Context(Mode.ACTUAL, MsgType.ALERT, NULL_UUID, new Date(2021, 5, 1))
-                .addLink([link1, link2])
+                .addLinks([link1, link2])
                 .setLevel(Level.OPERATIONAL)
                 .setSecurityClassification(SeClass.CONFIDENTIAL)
                 .setFreeText('Comments')
                 .setUrgency(Urgency.NOT_URGENT)
                 .setOrigin(new Origin(NULL_UUID, 'user', 'name'))
-                .addExternalInfo([info, info])
+                .addExternalInfos([info, info])
 
             expect(context).eql(src)
         })

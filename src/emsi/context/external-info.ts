@@ -17,7 +17,7 @@ export class ExternalInfo extends Default {
         this.freeText = freeText
     }
 
-    assign(source: Record<string, any>): this {
+    assign (source: Record<string, any>): this {
         let key
         const keys = Object.keys(source)
 

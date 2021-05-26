@@ -8,13 +8,13 @@ export class RType extends Default {
     capability?: Array<Capability>
     characteristics?: Array<Characteristics>
 
-    constructor(classes: Class[]) {
+    constructor (classes: Class[]) {
         classes.forEach((add: string) => ResourceError.checkLength(add, MAX_RTYPE_LENGTH))
         super()
         this.class = classes
     }
 
-    addCapability(capabilities: Capability[]): this {
+    addCapabilities (capabilities: Capability[]): this {
         capabilities.forEach((add: string) => ResourceError.checkLength(add, MAX_RTYPE_LENGTH))
 
         if (!this.capability)
@@ -23,7 +23,7 @@ export class RType extends Default {
         return this
     }
 
-    addCharacteristics(characteristics: Characteristics[]): this {
+    addCharacteristics (characteristics: Characteristics[]): this {
         characteristics.forEach((add: string) => ResourceError.checkLength(add, MAX_RTYPE_LENGTH))
 
         if (!this.characteristics)
@@ -32,11 +32,11 @@ export class RType extends Default {
         return this
     }
 
-    static default(): RType {
+    static default (): RType {
         return new RType([''])
     }
 
-    assign(source: Record<string, any>): this {
+    assign (source: Record<string, any>): this {
         let key
         const keys = Object.keys(source)
 

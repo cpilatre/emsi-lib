@@ -75,9 +75,9 @@ describe('emsi :: event', () => {
             .setObsDatime(new Date(2021, 0, 3).toISOString())
             .setStatus(Status.EVENT_COMPLETE)
             .setRiskAssessmnt(RiskAssessmnt.INCREASING)
-            .addReference([reference])
+            .addReferences([reference])
             .addCasualties([casualties])
-            .addEventGeo([eGeo])
+            .addEventGeos([eGeo])
             .setCause(Cause.ACCIDENTAL)
             .setFreeText('Comments')
 

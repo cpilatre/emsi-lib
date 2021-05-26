@@ -85,7 +85,7 @@ export class Event extends Default {
         return this
     }
 
-    addReference (references: Reference[]): this {
+    addReferences (references: Reference[]): this {
         if (!this.reference) 
             this.reference = new Array<Reference>()
         this.reference.push(...references)
@@ -99,7 +99,7 @@ export class Event extends Default {
         return this
     }
 
-    addEventGeo (eGeo: EGeo[]): this {
+    addEventGeos (eGeo: EGeo[]): this {
         if (!this.eGeo) 
             this.eGeo = new Array<EGeo>()
         this.eGeo.push(...eGeo)

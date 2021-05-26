@@ -29,27 +29,27 @@ export class Position extends Default {
         return this 
     }
 
-    addCoord (coords: Coord[]): this {
+    addCoords (coords: Coord[]): this {
         if (!this.coord)
             this.coord = new Array<Coord>()
         this.coord.push(...coords)
         return this
     }
 
-    addAddress (address: Address[]): this {
-        address.forEach(add => PositionError.checkLength(add, MAX_ADDRESS_LENGTH))
+    addAddresses (addresses: Address[]): this {
+        addresses.forEach(add => PositionError.checkLength(add, MAX_ADDRESS_LENGTH))
 
         if (!this.address)
             this.address = new Array<Address>()
-        this.address.push(...address)
+        this.address.push(...addresses)
         return this
     }
 
-    static default(): Position {
+    static default (): Position {
         return new Position(NULL_UUID)
     }
 
-    assign(source: Record<string, any>): this {
+    assign (source: Record<string, any>): this {
         let key
         const keys = Object.keys(source)
 
