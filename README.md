@@ -14,6 +14,18 @@ A EMSI (Emergency Management Shared Information) object model to manipulate emer
 
 ## Usage
 
+To use it install it first 
+
+Via [npm](https://www.npmjs.com/):
+```bash
+npm install emsi-lib
+```
+
+Via [yarn](https://yarnpkg.com/)
+```bash
+yarn add emsi-lib
+```
+
 ### Generate XML EMSI (JS -> XML)
 ```javascript
 import { Emsi, Event, Mission, Context, ExternalInfo, Origin, /* ... */} from 'emsi-lib'
@@ -66,3 +78,15 @@ if (target.context?.urgency !== Urgency.URGENT) {
     /* Send newMessage */
 }
 ```
+
+## Release History
+
+A short list of features, fixes and changes for each release is available in [CHANGELOG.md](https://github.com/cpilatre/emsi-lib/blob/main/CHANGELOG.md).
+
+## Contributing
+
+Anyone is welcome to submit issues and pull requests
+
+## License
+
+See [LICENSE](LICENSE).
