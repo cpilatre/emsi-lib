@@ -5,12 +5,28 @@ import { Event } from "./event";
 import { Mission } from "./mission";
 import { Resource } from "./resource";
 
+/**
+ * An EMSI describes a part of the operational picture at a particular time. 
+ * It is exchanged between nodes in order to transfer information and describes
+ * events, resources and missions.  */
 export class Emsi {
+    
+    /** Identifies the context of the EMSI. */
     context?: Context
+    
+    /** Describes the event that the EMSI relates to. */
     event?: Event
+
+    /** Describes the missions which are completed, are ongoing, or are planned and is
+     * related to the event and context reported in the EMSI. */
     mission?: Array<Mission>
+
+    /** Describes the resources (human, vehicles, other hardware, etc...) which the EMSI 
+     * node has the authority to deploy and is related to the event and context reported
+     * in the EMSI. */
     resource?: Array<Resource>
     
+    /** Set the context of the EMSI (mandatory) */
     setContext (context: Context): this {
         this.context = context
         return this 

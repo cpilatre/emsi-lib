@@ -1,0 +1,499 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>emsi-lib</title>
+	<meta name="description" content="Documentation for emsi-lib">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">emsi-lib</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<h1>emsi-lib</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#emsi-lib" id="emsi-lib" style="color: inherit; text-decoration: none;">
+					<h1>emsi-lib</h1>
+				</a>
+				<p><a href="https://github.com/cpilatre/emsi-lib/actions?query=workflow%3A%22build%22"><img src="https://github.com/cpilatre/emsi-lib/actions/workflows/build.yml/badge.svg" alt="Build Status"></a>
+					<a href="https://github.com/cpilatre/emsi-lib/actions?query=workflow%3A%22test%22"><img src="https://github.com/cpilatre/emsi-lib/actions/workflows/test.yml/badge.svg" alt="Build Status"></a>
+				<a href="https://packagephobia.now.sh/result?p=emsi-lib"><img src="https://packagephobia.now.sh/badge?p=emsi-lib" alt="Install Size"></a></p>
+				<p>A EMSI (Emergency Management Shared Information) object model to manipulate emergency messages defined in ISO/TR 22351 document.</p>
+				<a href="#main-features" id="main-features" style="color: inherit; text-decoration: none;">
+					<h2>Main features</h2>
+				</a>
+				<ul>
+					<li>Provide high level abstraction of EMSI objects and types</li>
+					<li>Generate XML message from EMSI objects</li>
+					<li>Generate EMSI objects from XML </li>
+					<li>Check ISO rules (work in progress)</li>
+				</ul>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h2>Usage</h2>
+				</a>
+				<p>To use it install it first </p>
+				<p>Via <a href="https://www.npmjs.com/">npm</a>:</p>
+				<pre><code class="language-bash"><span style="color: #000000">npm install emsi-lib</span>
+</code></pre>
+				<p>Via <a href="https://yarnpkg.com/">yarn</a></p>
+				<pre><code class="language-bash"><span style="color: #000000">yarn add emsi-lib</span>
+</code></pre>
+				<a href="#generate-xml-emsi-js--gt-xml" id="generate-xml-emsi-js--gt-xml" style="color: inherit; text-decoration: none;">
+					<h3>Generate XML EMSI (JS -&gt; XML)</h3>
+				</a>
+				<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Emsi</span><span style="color: #000000">, </span><span style="color: #001080">Event</span><span style="color: #000000">, </span><span style="color: #001080">Mission</span><span style="color: #000000">, </span><span style="color: #001080">Context</span><span style="color: #000000">, </span><span style="color: #001080">ExternalInfo</span><span style="color: #000000">, </span><span style="color: #001080">Origin</span><span style="color: #000000">, </span><span style="color: #008000">/* ... */</span><span style="color: #000000">} </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;emsi-lib&#039;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">extInfo</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">ExternalInfo</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;https://secourir.eu/.../&quot;</span><span style="color: #000000">, </span><span style="color: #001080">InfoType</span><span style="color: #000000">.</span><span style="color: #0070C1">PHOTO</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;Photos of the accident&quot;</span><span style="color: #000000">)</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">origin</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Origin</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;43d38170-ce5d-4d8e-81d7-2bd4071d83f4&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;58113&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;SC/SDIS24&quot;</span><span style="color: #000000">)</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">context</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Context</span><span style="color: #000000">(</span><span style="color: #001080">Mode</span><span style="color: #000000">.</span><span style="color: #0070C1">ACTUAL</span><span style="color: #000000">, </span><span style="color: #001080">MsgType</span><span style="color: #000000">.</span><span style="color: #0070C1">ALERT</span><span style="color: #000000">)</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">setFreeText</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;First message&quot;</span><span style="color: #000000">)</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">setLevel</span><span style="color: #000000">(</span><span style="color: #001080">Level</span><span style="color: #000000">.</span><span style="color: #0070C1">TACTICAL</span><span style="color: #000000">)</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">setSecurityClassification</span><span style="color: #000000">(</span><span style="color: #001080">SeClass</span><span style="color: #000000">.</span><span style="color: #0070C1">RESTRICTED</span><span style="color: #000000">)</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">setUrgency</span><span style="color: #000000">(</span><span style="color: #001080">Urgency</span><span style="color: #000000">.</span><span style="color: #0070C1">URGENT</span><span style="color: #000000">)</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">addExternalInfo</span><span style="color: #000000">([ </span><span style="color: #001080">extInfo</span><span style="color: #000000"> ])</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">setOrigin</span><span style="color: #000000">(</span><span style="color: #001080">origin</span><span style="color: #000000">)</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">mission</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Mission</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Casualty search&#039;</span><span style="color: #000000">)</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">setStatus</span><span style="color: #000000">(</span><span style="color: #001080">MissionStatus</span><span style="color: #000000">.</span><span style="color: #0070C1">IN_PROGRESS</span><span style="color: #000000">, </span><span style="color: #098658">30</span><span style="color: #000000">)</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">setPriority</span><span style="color: #000000">(</span><span style="color: #001080">MissionPriority</span><span style="color: #000000">.</span><span style="color: #0070C1">P3</span><span style="color: #000000">)</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">setStartTime</span><span style="color: #000000">(</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99">Date</span><span style="color: #000000">())</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">setFreeText</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Many victims&#039;</span><span style="color: #000000">)</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">etype</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">EType</span><span style="color: #000000">([</span><span style="color: #A31515">&#039;/TRP/COL&#039;</span><span style="color: #000000">], [</span><span style="color: #A31515">&#039;/VEH/TRK&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;/VEH/TRN&#039;</span><span style="color: #000000">], [</span><span style="color: #A31515">&#039;/RAIL/TRK&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;ROAD&#039;</span><span style="color: #000000">])</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">event</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Event</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;FR-SC-24-0001&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;Railway accident&#039;</span><span style="color: #000000">)</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">setScale</span><span style="color: #000000">(</span><span style="color: #001080">Scale</span><span style="color: #000000">.</span><span style="color: #0070C1">LEVEL_1</span><span style="color: #000000">)</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">setEventType</span><span style="color: #000000">(</span><span style="color: #001080">etype</span><span style="color: #000000">)</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">emsi</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Emsi</span><span style="color: #000000">()</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">setContext</span><span style="color: #000000">(</span><span style="color: #001080">context</span><span style="color: #000000">)</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">setEvent</span><span style="color: #000000">(</span><span style="color: #001080">event</span><span style="color: #000000">)</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">addMissions</span><span style="color: #000000">([</span><span style="color: #001080">mission</span><span style="color: #000000">])</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">emsiXml</span><span style="color: #000000"> = </span><span style="color: #001080">emsi</span><span style="color: #000000">.</span><span style="color: #795E26">generateXml</span><span style="color: #000000">()</span>
+</code></pre>
+				<a href="#populate-emsi-object-from-xml-xml--gt-js" id="populate-emsi-object-from-xml-xml--gt-js" style="color: inherit; text-decoration: none;">
+					<h3>Populate EMSI object from XML (XML -&gt; JS)</h3>
+				</a>
+				<pre><code class="language-javascript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">target</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Emsi</span><span style="color: #000000">()</span>
+<span style="color: #001080">target</span><span style="color: #000000">.</span><span style="color: #795E26">loadFromXml</span><span style="color: #000000">(</span><span style="color: #001080">emsiXml</span><span style="color: #000000">)</span>
+
+<span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #001080">target</span><span style="color: #000000">.</span><span style="color: #001080">context</span><span style="color: #000000">?.</span><span style="color: #001080">urgency</span><span style="color: #000000"> !== </span><span style="color: #001080">Urgency</span><span style="color: #000000">.</span><span style="color: #0070C1">URGENT</span><span style="color: #000000">) {</span>
+
+<span style="color: #000000">    </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #001080">target</span><span style="color: #000000">.</span><span style="color: #001080">context</span><span style="color: #000000">?.</span><span style="color: #001080">link</span><span style="color: #000000">?.[</span><span style="color: #098658">1</span><span style="color: #000000">].</span><span style="color: #001080">linkRole</span><span style="color: #000000"> !== </span><span style="color: #001080">LinkRole</span><span style="color: #000000">.</span><span style="color: #0070C1">SUPERSEDE</span><span style="color: #000000">)</span>
+<span style="color: #000000">        </span><span style="color: #001080">target</span><span style="color: #000000">.</span><span style="color: #001080">context</span><span style="color: #000000">?.</span><span style="color: #795E26">addLink</span><span style="color: #000000">([</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Link</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;43d38170-ce5d-4d8e-81d7-2bd4071d83f4&#039;</span><span style="color: #000000">, </span><span style="color: #001080">LinkRole</span><span style="color: #000000">.</span><span style="color: #0070C1">SUPERSEDE</span><span style="color: #000000">)])</span>
+
+<span style="color: #000000">    </span><span style="color: #001080">emsi</span><span style="color: #000000">.</span><span style="color: #001080">mission</span><span style="color: #000000">?.[</span><span style="color: #098658">0</span><span style="color: #000000">].</span><span style="color: #795E26">setEndTime</span><span style="color: #000000">(</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99">Date</span><span style="color: #000000">())</span>
+<span style="color: #000000">    </span>
+<span style="color: #000000">    </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">newMessage</span><span style="color: #000000"> = </span><span style="color: #001080">target</span><span style="color: #000000">.</span><span style="color: #795E26">generateXml</span><span style="color: #000000">()</span>
+<span style="color: #000000">    </span><span style="color: #008000">/* Send newMessage */</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<a href="#release-history" id="release-history" style="color: inherit; text-decoration: none;">
+					<h2>Release History</h2>
+				</a>
+				<p>A short list of features, fixes and changes for each release is available in <a href="https://github.com/cpilatre/emsi-lib/blob/main/CHANGELOG.md">CHANGELOG.md</a>.</p>
+				<a href="#contributing" id="contributing" style="color: inherit; text-decoration: none;">
+					<h2>Contributing</h2>
+				</a>
+				<p>Anyone is welcome to submit issues and pull requests</p>
+				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+					<h2>License</h2>
+				</a>
+				<p>See <a href="LICENSE">LICENSE</a>.</p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-enum">
+						<a href="enums/casualtiescontext.html" class="tsd-kind-icon">Casualties<wbr>Context</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/casualtiesstatus.html" class="tsd-kind-icon">Casualties<wbr>Status</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/cause.html" class="tsd-kind-icon">Cause</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/contacttype.html" class="tsd-kind-icon">Contact<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/contamination.html" class="tsd-kind-icon">Contamination</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/egeostatus.html" class="tsd-kind-icon">EGeo<wbr>Status</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/emsistatus.html" class="tsd-kind-icon">Emsi<wbr>Status</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/health.html" class="tsd-kind-icon">Health</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/heightrole.html" class="tsd-kind-icon">Height<wbr>Role</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/infotype.html" class="tsd-kind-icon">Info<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/level.html" class="tsd-kind-icon">Level</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/linkrole.html" class="tsd-kind-icon">Link<wbr>Role</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/location.html" class="tsd-kind-icon">Location</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/missionpriority.html" class="tsd-kind-icon">Mission<wbr>Priority</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/missionstatus.html" class="tsd-kind-icon">Mission<wbr>Status</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/mode.html" class="tsd-kind-icon">Mode</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/msgtype.html" class="tsd-kind-icon">Msg<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/positiontype.html" class="tsd-kind-icon">Position<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/resourcestatus.html" class="tsd-kind-icon">Resource<wbr>Status</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/riskassessmnt.html" class="tsd-kind-icon">Risk<wbr>Assessmnt</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/scale.html" class="tsd-kind-icon">Scale</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/seclass.html" class="tsd-kind-icon">Se<wbr>Class</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/source.html" class="tsd-kind-icon">Source</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/status.html" class="tsd-kind-icon">Status</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/triage.html" class="tsd-kind-icon">Triage</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/urgency.html" class="tsd-kind-icon">Urgency</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/casualties.html" class="tsd-kind-icon">Casualties</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/contact.html" class="tsd-kind-icon">Contact</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/context.html" class="tsd-kind-icon">Context</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/contexterror.html" class="tsd-kind-icon">Context<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/coord.html" class="tsd-kind-icon">Coord</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/egeo.html" class="tsd-kind-icon">EGeo</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/etype.html" class="tsd-kind-icon">EType</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/emsi.html" class="tsd-kind-icon">Emsi</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/emsierror.html" class="tsd-kind-icon">Emsi<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/event.html" class="tsd-kind-icon">Event</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/eventerror.html" class="tsd-kind-icon">Event<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/externalinfo.html" class="tsd-kind-icon">External<wbr>Info</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/informations.html" class="tsd-kind-icon">Informations</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/link.html" class="tsd-kind-icon">Link</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/mission.html" class="tsd-kind-icon">Mission</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/missionerror.html" class="tsd-kind-icon">Mission<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/origin.html" class="tsd-kind-icon">Origin</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/position.html" class="tsd-kind-icon">Position</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/positionerror.html" class="tsd-kind-icon">Position<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/rgeo.html" class="tsd-kind-icon">RGeo</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/rtype.html" class="tsd-kind-icon">RType</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/reference.html" class="tsd-kind-icon">Reference</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/resource.html" class="tsd-kind-icon">Resource</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/resourceerror.html" class="tsd-kind-icon">Resource<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#actor" class="tsd-kind-icon">Actor</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#address" class="tsd-kind-icon">Address</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#capability" class="tsd-kind-icon">Capability</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#category" class="tsd-kind-icon">Category</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#certainly" class="tsd-kind-icon">Certainly</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#characteristics" class="tsd-kind-icon">Characteristics</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#class" class="tsd-kind-icon">Class</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#contextid" class="tsd-kind-icon">Context<wbr>Id</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#coordsys" class="tsd-kind-icon">Coord<wbr>Sys</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#count" class="tsd-kind-icon">Count</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#datime" class="tsd-kind-icon">Datime</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#detail" class="tsd-kind-icon">Detail</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#egeoid" class="tsd-kind-icon">EGeo<wbr>Id</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#egeotype" class="tsd-kind-icon">EGeo<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#env" class="tsd-kind-icon">Env</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#eventid" class="tsd-kind-icon">Event<wbr>Id</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#freetext" class="tsd-kind-icon">Free<wbr>Text</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#height" class="tsd-kind-icon">Height</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#latitude" class="tsd-kind-icon">Latitude</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#linkid" class="tsd-kind-icon">Link<wbr>Id</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#locid" class="tsd-kind-icon">Loc<wbr>Id</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#loctype" class="tsd-kind-icon">Loc<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#longitude" class="tsd-kind-icon">Longitude</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#mainmissionid" class="tsd-kind-icon">Main<wbr>Mission<wbr>Id</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#missionid" class="tsd-kind-icon">Mission<wbr>Id</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#missiontype" class="tsd-kind-icon">Mission<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#name" class="tsd-kind-icon">Name</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#nationality" class="tsd-kind-icon">Nationality</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#orgid" class="tsd-kind-icon">Org<wbr>Id</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#quantity" class="tsd-kind-icon">Quantity</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#rgeoid" class="tsd-kind-icon">RGeo<wbr>Id</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#rgeotype" class="tsd-kind-icon">RGeo<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#resourceid" class="tsd-kind-icon">Resource<wbr>Id</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#uri" class="tsd-kind-icon">URI</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#unitofmeasure" class="tsd-kind-icon">Unit<wbr>OfMeasure</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#userid" class="tsd-kind-icon">User<wbr>Id</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#weather" class="tsd-kind-icon">Weather</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="modules.html#coordsys" class="tsd-kind-icon">COORDSYS</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="modules.html#max_address_length" class="tsd-kind-icon">MAX_<wbr>ADDRESS_<wbr>LENGTH</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="modules.html#max_detail_length" class="tsd-kind-icon">MAX_<wbr>DETAIL_<wbr>LENGTH</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="modules.html#max_etype_length" class="tsd-kind-icon">MAX_<wbr>ETYPE_<wbr>LENGTH</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="modules.html#max_freetext_length" class="tsd-kind-icon">MAX_<wbr>FREETEXT_<wbr>LENGTH</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="modules.html#max_id_length" class="tsd-kind-icon">MAX_<wbr>ID_<wbr>LENGTH</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="modules.html#max_loc_id_length" class="tsd-kind-icon">MAX_<wbr>LOC_<wbr>ID_<wbr>LENGTH</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="modules.html#max_name_length" class="tsd-kind-icon">MAX_<wbr>NAME_<wbr>LENGTH</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="modules.html#max_name_x2_length" class="tsd-kind-icon">MAX_<wbr>NAME_<wbr><wbr>X2_<wbr>LENGTH</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="modules.html#max_resource_id_length" class="tsd-kind-icon">MAX_<wbr>RESOURCE_<wbr>ID_<wbr>LENGTH</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="modules.html#max_rtype_length" class="tsd-kind-icon">MAX_<wbr>RTYPE_<wbr>LENGTH</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="modules.html#max_uri_length" class="tsd-kind-icon">MAX_<wbr>URI_<wbr>LENGTH</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="modules.html#max_user_id_length" class="tsd-kind-icon">MAX_<wbr>USER_<wbr>ID_<wbr>LENGTH</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="modules.html#max_weather_length" class="tsd-kind-icon">MAX_<wbr>WEATHER_<wbr>LENGTH</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="modules.html#null_uuid" class="tsd-kind-icon">NULL_<wbr>UUID</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
