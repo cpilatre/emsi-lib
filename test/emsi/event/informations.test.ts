@@ -12,23 +12,15 @@ export default function (): any {
             health: 'DEAD'
         }
 
-        it('Build object', () => {
+        it('Compare build object and assigned object', () => {
             const informations = new Informations(CasualtiesStatus.CITIZEN)
                 .setTriage(Triage.BLACK)
                 .setContamination(Contamination.CONTAMINATION_NOT_ASSESSED)
                 .setLocation(Location.CONFINED)
                 .setHealth(Health.DEAD)
 
-            expect(informations).eql(src)
-        })
-
-        it('Assign data to object', () => {
-            const informations = Informations.default().assign(src)
-            expect(informations).to.have.property('status', CasualtiesStatus.CITIZEN)
-            expect(informations).to.have.property('triage', Triage.BLACK)
-            expect(informations).to.have.property('contamination', Contamination.CONTAMINATION_NOT_ASSESSED)
-            expect(informations).to.have.property('location', Location.CONFINED)
-            expect(informations).to.have.property('health', Health.DEAD)
+            const dest = Informations.default().assign(src)
+            expect(informations).eql(dest)
         })
     })
 }

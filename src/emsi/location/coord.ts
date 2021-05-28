@@ -28,13 +28,13 @@ export class Coord extends Default {
         const keys = Object.keys(source)
 
         if ((key = keys.find(f => f === 'lat')))
-            this.lat = source[key]
+            this.lat = parseFloat(source[key])
 
         if ((key = keys.find(f => f === 'lon')))
-            this.lon = source[key]
+            this.lon = parseFloat(source[key])
 
         if ((key = keys.find(f => f === 'height')))
-            this.height = source[key]
+            this.height = parseFloat(source[key])
 
         return this
     }

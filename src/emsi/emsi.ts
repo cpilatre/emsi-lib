@@ -68,10 +68,10 @@ export class Emsi {
 
             if (js.emsi.resource) {
                 this.resource = new Array<Resource>()
-                if (js.emsi.mission instanceof Array)
-                    js.emsi.mission.forEach((add: Record<string, any>) => this.resource?.push(Resource.default().assign(add)))
+                if (js.emsi.resource instanceof Array)
+                    js.emsi.resource.forEach((add: Record<string, any>) => this.resource?.push(Resource.default().assign(add)))
                 else 
-                    this.resource.push(Resource.default().assign(js.emsi.mission))
+                    this.resource.push(Resource.default().assign(js.emsi.resource))
             }
         }
 

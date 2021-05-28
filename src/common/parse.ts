@@ -10,7 +10,7 @@ const options2xml = {
     format: true,
     indentBy: '  ',
     supressEmptyNode: true,
-    tagValueProcessor: (value: string) => he.encode(value, { useNamedReferences: true })
+    tagValueProcessor: (value: string | number) => he.encode('' + value, { useNamedReferences: true })
 }
 
 const options2js = {

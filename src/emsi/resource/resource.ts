@@ -40,7 +40,7 @@ export class Resource extends Default {
         return this
     }
 
-    setfreeText (freeText?: FreeText): this {
+    setFreeText (freeText?: FreeText): this {
         ResourceError.checkLength(freeText, MAX_FREETEXT_LENGTH)
         this.freeText = freeText
         return this
@@ -73,7 +73,7 @@ export class Resource extends Default {
         return this
     }
  
-    addContact (contacts: Contact[]): this {
+    addContacts (contacts: Contact[]): this {
         if (!this.contact)
             this.contact = new Array<Contact>()
         this.contact.push(...contacts)
@@ -98,7 +98,7 @@ export class Resource extends Default {
             this.name = source[key]
 
         if ((key = keys.find(f => f === 'quantity')))
-            this.quantity = source[key]
+            this.quantity = parseFloat(source[key])
 
         if ((key = keys.find(f => f === 'um')))
             this.um = source[key]
@@ -117,7 +117,7 @@ export class Resource extends Default {
             if (source[key] instanceof Array)
                 source[key].forEach((add: Record<string, any>) => this.rType?.push(RType.default().assign(add)))
             else 
-                this.rType.push(RType.default().assign([key]))
+                this.rType.push(RType.default().assign(source[key]))
         }   
         
         if ((key = keys.find(f => f === 'rGeo'))) {
@@ -125,7 +125,7 @@ export class Resource extends Default {
             if (source[key] instanceof Array)
                 source[key].forEach((add: Record<string, any>) => this.rGeo?.push(RGeo.default().assign(add)))
             else 
-                this.rGeo.push(RGeo.default().assign([key]))
+                this.rGeo.push(RGeo.default().assign(source[key]))
         }   
 
         if ((key = keys.find(f => f === 'contact'))) {
@@ -133,7 +133,7 @@ export class Resource extends Default {
             if (source[key] instanceof Array)
                 source[key].forEach((add: Record<string, any>) => this.contact?.push(Contact.default().assign(add)))
             else 
-                this.contact.push(Contact.default().assign([key]))
+                this.contact.push(Contact.default().assign(source[key]))
         }   
         
         return this

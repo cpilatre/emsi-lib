@@ -1,3 +1,10 @@
+# 0.1.2 - 2021-05-28
+
+- Fix number attribute error
+- Fix resource assign errors
+- Fix loadFromXml Resource error
+- Finalize tests
+
 # 0.1.1 - 2021-05-26
 
 - Fix EGeo.addWeather error

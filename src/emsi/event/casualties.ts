@@ -38,7 +38,7 @@ export class Casualties extends Default {
             this.context = source[key]
 
         if ((key = keys.find(f => f === 'count')))
-            this.count = source[key]
+            this.count = parseFloat(source[key])
 
         if ((key = keys.find(f => f === 'informations')))
             this.informations = Informations.default().assign(source[key])

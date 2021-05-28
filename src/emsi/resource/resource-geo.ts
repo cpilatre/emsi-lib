@@ -1,6 +1,6 @@
-import { MAX_WEATHER_LENGTH, MAX_RTYPE_LENGTH, MAX_FREETEXT_LENGTH, MAX_ID_LENGTH } from "../../common/config";
+import { MAX_RTYPE_LENGTH, MAX_FREETEXT_LENGTH, MAX_ID_LENGTH } from "../../common/config";
 import { Default } from "../../common/default"
-import { Datime, RGeoId, RGeoType, FreeText, Weather } from "../../common/types";
+import { Datime, RGeoId, RGeoType, FreeText } from "../../common/types";
 import { EventError } from "../../error";
 import { Position } from "../location";
 
@@ -13,7 +13,6 @@ export class RGeo extends Default {
 
     constructor (type: RGeoType, position?: Position) {
         EventError.checkLength(type, MAX_RTYPE_LENGTH)
-
         super()
         this.type = type
         this.position = position
@@ -21,11 +20,6 @@ export class RGeo extends Default {
 
     setDatime (datime: Datime): this {
         this.datime = datime
-        return this
-    }
-
-    addWeather (weathers: Weather[]): this {
-        weathers.forEach(weather => EventError.checkLength(weather, MAX_WEATHER_LENGTH))
         return this
     }
 

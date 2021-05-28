@@ -144,7 +144,7 @@ export class Event extends Default {
             this.scale = source[key]
 
         if ((key = keys.find(f => f === 'certainly')))
-            this.certainly = source[key]
+            this.certainly = parseInt(source[key])
 
         if ((key = keys.find(f => f === 'declDatime')))
             this.declDatime = source[key]
