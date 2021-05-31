@@ -79,6 +79,10 @@ if (target.context?.urgency !== Urgency.URGENT) {
 }
 ```
 
+## Documentation
+
+The documentation is available [here](https://cpilatre.github.io/emsi-lib/) (WIP).
+
 ## Release History
 
 A short list of features, fixes and changes for each release is available in [CHANGELOG.md](https://github.com/cpilatre/emsi-lib/blob/main/CHANGELOG.md).
