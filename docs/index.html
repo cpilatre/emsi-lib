@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>emsi-lib</title>
-	<meta name="description" content="Documentation for emsi-lib">
+	<title>emsi-lib - v0.1.3</title>
+	<meta name="description" content="Documentation for emsi-lib - v0.1.3">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
 	<script async src="assets/js/search.js" id="search-script"></script>
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">emsi-lib</a>
+					<a href="index.html" class="title">emsi-lib - v0.1.3</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -50,7 +50,7 @@
 	</div>
 	<div class="tsd-page-title">
 		<div class="container">
-			<h1>emsi-lib</h1>
+			<h1>emsi-lib - v0.1.3</h1>
 		</div>
 	</div>
 </header>
@@ -58,32 +58,9 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<a href="#emsi-lib" id="emsi-lib" style="color: inherit; text-decoration: none;">
-					<h1>emsi-lib</h1>
-				</a>
-				<p><a href="https://github.com/cpilatre/emsi-lib/actions?query=workflow%3A%22build%22"><img src="https://github.com/cpilatre/emsi-lib/actions/workflows/build.yml/badge.svg" alt="Build Status"></a>
-					<a href="https://github.com/cpilatre/emsi-lib/actions?query=workflow%3A%22test%22"><img src="https://github.com/cpilatre/emsi-lib/actions/workflows/test.yml/badge.svg" alt="Build Status"></a>
-				<a href="https://packagephobia.now.sh/result?p=emsi-lib"><img src="https://packagephobia.now.sh/badge?p=emsi-lib" alt="Install Size"></a></p>
-				<p>A EMSI (Emergency Management Shared Information) object model to manipulate emergency messages defined in ISO/TR 22351 document.</p>
-				<a href="#main-features" id="main-features" style="color: inherit; text-decoration: none;">
-					<h2>Main features</h2>
-				</a>
-				<ul>
-					<li>Provide high level abstraction of EMSI objects and types</li>
-					<li>Generate XML message from EMSI objects</li>
-					<li>Generate EMSI objects from XML </li>
-					<li>Check ISO rules (work in progress)</li>
-				</ul>
 				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
 					<h2>Usage</h2>
 				</a>
-				<p>To use it install it first </p>
-				<p>Via <a href="https://www.npmjs.com/">npm</a>:</p>
-				<pre><code class="language-bash"><span style="color: #000000">npm install emsi-lib</span>
-</code></pre>
-				<p>Via <a href="https://yarnpkg.com/">yarn</a></p>
-				<pre><code class="language-bash"><span style="color: #000000">yarn add emsi-lib</span>
-</code></pre>
 				<a href="#generate-xml-emsi-js--gt-xml" id="generate-xml-emsi-js--gt-xml" style="color: inherit; text-decoration: none;">
 					<h3>Generate XML EMSI (JS -&gt; XML)</h3>
 				</a>
@@ -98,7 +75,7 @@
 <span style="color: #000000">    .</span><span style="color: #795E26">setLevel</span><span style="color: #000000">(</span><span style="color: #001080">Level</span><span style="color: #000000">.</span><span style="color: #0070C1">TACTICAL</span><span style="color: #000000">)</span>
 <span style="color: #000000">    .</span><span style="color: #795E26">setSecurityClassification</span><span style="color: #000000">(</span><span style="color: #001080">SeClass</span><span style="color: #000000">.</span><span style="color: #0070C1">RESTRICTED</span><span style="color: #000000">)</span>
 <span style="color: #000000">    .</span><span style="color: #795E26">setUrgency</span><span style="color: #000000">(</span><span style="color: #001080">Urgency</span><span style="color: #000000">.</span><span style="color: #0070C1">URGENT</span><span style="color: #000000">)</span>
-<span style="color: #000000">    .</span><span style="color: #795E26">addExternalInfo</span><span style="color: #000000">([ </span><span style="color: #001080">extInfo</span><span style="color: #000000"> ])</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">addExternalInfos</span><span style="color: #000000">([ </span><span style="color: #001080">extInfo</span><span style="color: #000000"> ])</span>
 <span style="color: #000000">    .</span><span style="color: #795E26">setOrigin</span><span style="color: #000000">(</span><span style="color: #001080">origin</span><span style="color: #000000">)</span>
 
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">mission</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Mission</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Casualty search&#039;</span><span style="color: #000000">)</span>
@@ -137,18 +114,6 @@
 <span style="color: #000000">    </span><span style="color: #008000">/* Send newMessage */</span>
 <span style="color: #000000">}</span>
 </code></pre>
-				<a href="#release-history" id="release-history" style="color: inherit; text-decoration: none;">
-					<h2>Release History</h2>
-				</a>
-				<p>A short list of features, fixes and changes for each release is available in <a href="https://github.com/cpilatre/emsi-lib/blob/main/CHANGELOG.md">CHANGELOG.md</a>.</p>
-				<a href="#contributing" id="contributing" style="color: inherit; text-decoration: none;">
-					<h2>Contributing</h2>
-				</a>
-				<p>Anyone is welcome to submit issues and pull requests</p>
-				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
-					<h2>License</h2>
-				</a>
-				<p>See <a href="LICENSE">LICENSE</a>.</p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">

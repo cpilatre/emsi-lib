@@ -27,7 +27,7 @@ export type Env = string
 export enum Source { COMPUTER_FORECAST = 'COMFOR', HUMAN_DEDUCTION = 'HUMDED', HUMAN_OBSERVATION = 'HUMOBS', SENSOR_OBSERVATION = 'SENSOR' }
 export enum Scale { LEVEL_1 = '1', LEVEL_2  = '2', LEVEL_3 = '3', LEVEL_4 = '4', LEVEL_5  = '5' }
 export type Certainly = number
-export enum Status { EVENT_COMPLETE = 'COM', EVENT_IN_PROGRESS = 'IPR', EVENT_NOT_STARTED = 'NST', EVENT_UNDER_CONTROL = 'STOP' }
+export enum Status { EVENT_COMPLETE = 'COM', EVENT_IN_PROGRESS = 'IPR', EVENT_NOT_STARTED = 'NST', EVENT_UNDER_CONTROL = 'STOP', ABORTED = 'ABO', CANCELLED = 'CANCLD' }
 export enum RiskAssessmnt { INCREASING = 'INCREA', DECREASING = 'DECREA', STABLE = 'STABLE' }
 export enum Cause { ACCIDENTAL = 'ACC', DELIBERATE = 'DEL', NATURAL = 'NAT' }
 export type EGeoType = string
