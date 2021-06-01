@@ -32,11 +32,13 @@ export class Emsi {
         return this 
     }
 
+    /** Set the event of the EMSI (mandatory) */
     setEvent (event: Event): this {
         this.event = event
         return this 
     }
 
+    /** Add one or more missions */
     addMissions (missions: Mission[]): this {
         if (!this.mission)
             this.mission = new Array<Mission>()
@@ -44,6 +46,7 @@ export class Emsi {
         return this
     }
 
+    /** Add one or more resources */    
     addResources (resources: Resource[]): this {
         if (!this.resource)
             this.resource = new Array<Resource>()
@@ -51,6 +54,15 @@ export class Emsi {
         return this
     }
 
+    /**
+     * Returns a well-formed XML EMSI
+     * 
+     * @remarks By default, tags are CamelCase formatted, and output is indented
+     * 
+     * @param options Modifying certain behaviours for XML generation
+     * @param fn An alternative function for generating XML
+     * @returns The XML EMSI string
+     */
     generateXml (options?: ParseOptions, fn?: Js2XmlFn): string {
         return js2xml(
             { emsi: {
@@ -94,6 +106,10 @@ export class Emsi {
         return this
     }
 
+    /**
+     * Check EMSI object 
+     * @beta
+     */
     checkStatus (): EmsiStatus {
         if (!this.context || !this.event)
             return EmsiStatus.PARTIAL

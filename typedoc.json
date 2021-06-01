@@ -1,5 +1,7 @@
 {
     "entryPoints": ["src/index.ts"],
     "out": "docs",
-    "disableSources": true
+    "disableSources": true,
+    "readme": "./DOC.md",
+    "includeVersion": true
   }

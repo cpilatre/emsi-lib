@@ -2,6 +2,7 @@
 
 ### Bug Fixes
 - Fix test errors (Time zones)
+- Fix status event 
 
 ### Chores
 - Update README (Documentation link)
