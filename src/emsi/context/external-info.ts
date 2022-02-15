@@ -1,5 +1,5 @@
 import { MAX_FREETEXT_LENGTH, MAX_URI_LENGTH } from "../../common/config";
-import { Default } from "../../common/default"
+import { Default, IndexDefaultMethod } from "../../common/default"
 import { FreeText, InfoType, URI } from "../../common/types";
 import { ContextError } from "../../error";
 
@@ -17,22 +17,7 @@ export class ExternalInfo extends Default {
         this.freeText = freeText
     }
 
-    assign (source: Record<string, any>): this {
-        let key
-        const keys = Object.keys(source)
-
-        if ((key = keys.find(f => f === 'uri')))
-            this.uri = source[key]
-
-        if ((key = keys.find(f => f === 'infoType')))
-            this.infoType = source[key]
-
-        if ((key = keys.find(f => f === 'freeText')))
-            this.freeText = source[key]
-
-        return this
-    }   
-
+    @IndexDefaultMethod()
     static default(): ExternalInfo {
         return new ExternalInfo('http://')
     }

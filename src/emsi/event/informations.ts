@@ -1,4 +1,4 @@
-import { Default } from "../../common/default"
+import { Default, IndexDefaultMethod } from "../../common/default"
 import { CasualtiesStatus, Contamination, Health, Location, Triage } from "../../common/types"
 
 export class Informations extends Default {
@@ -33,29 +33,8 @@ export class Informations extends Default {
         return this
     }
 
+    @IndexDefaultMethod()
     static default (): Informations {
         return new Informations(CasualtiesStatus.UNKNOWN)
-    }
-
-    assign (source: Record<string, any>): this {
-        let key
-        const keys = Object.keys(source)
-
-        if ((key = keys.find(f => f === 'status')))
-            this.status = source[key]
-
-        if ((key = keys.find(f => f === 'triage')))
-            this.triage = source[key]
-
-        if ((key = keys.find(f => f === 'contamination')))
-            this.contamination = source[key]
-
-        if ((key = keys.find(f => f === 'location')))
-            this.location = source[key]
-
-        if ((key = keys.find(f => f === 'health')))
-            this.health = source[key]
-
-        return this
     }
 }

@@ -1,5 +1,5 @@
 import { MAX_RTYPE_LENGTH, MAX_FREETEXT_LENGTH, MAX_ID_LENGTH } from "../../common/config";
-import { Default } from "../../common/default"
+import { Default, IndexDefaultMethod } from "../../common/default"
 import { Datime, RGeoId, RGeoType, FreeText } from "../../common/types";
 import { EventError } from "../../error";
 import { Position } from "../location";
@@ -35,29 +35,8 @@ export class RGeo extends Default {
         return this
     }
 
+    @IndexDefaultMethod()
     static default (): RGeo {
         return new RGeo('')
-    }
-
-    assign (source: Record<string, any>): this {
-        let key
-        const keys = Object.keys(source)
-
-        if ((key = keys.find(f => f === 'datime')))
-            this.datime = source[key]
-
-        if ((key = keys.find(f => f === 'type')))
-            this.type = source[key]            
-
-         if ((key = keys.find(f => f === 'freeText')))
-            this.freeText = source[key]            
-
-        if ((key = keys.find(f => f === 'position')))
-            this.position = Position.default().assign(source[key])   
-
-        if ((key = keys.find(f => f === 'id')))
-            this.id = source[key]            
-
-        return this
     }
 }

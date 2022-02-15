@@ -1,5 +1,5 @@
 import { MAX_FREETEXT_LENGTH, MAX_ID_LENGTH, MAX_NAME_LENGTH, MAX_RESOURCE_ID_LENGTH } from "../../common/config"
-import { Default } from "../../common/default"
+import { Default, IdentifyArrayProperty, IndexDefaultMethod, TypeOfArray } from "../../common/default"
 import { FreeText, Name, Nationality, OrgId, Quantity, ResourceId, ResourceStatus, UnitOfMeasure } from "../../common/types"
 import { ResourceError } from "../../error/resource.error"
 import { Contact } from "./contact"
@@ -7,16 +7,19 @@ import { RGeo } from "./resource-geo"
 import { RType } from "./resource-type"
 
 export class Resource extends Default {
+    @IdentifyArrayProperty(TypeOfArray.OBJECT_ARRAY) 
     rType: Array<RType>
     id?: ResourceId
     orgId?: OrgId
     name?: Name
     freeText?: FreeText
+    @IdentifyArrayProperty(TypeOfArray.OBJECT_ARRAY) 
     rGeo?: Array<RGeo>
     quantity?: Quantity
     um?: UnitOfMeasure
     status?: ResourceStatus
     nationality?: Nationality
+    @IdentifyArrayProperty(TypeOfArray.OBJECT_ARRAY) 
     contact?: Array<Contact>
 
     constructor (rTypes: RType[], id?: ResourceId) {
@@ -80,62 +83,8 @@ export class Resource extends Default {
         return this
     }
 
+    @IndexDefaultMethod()
     static default (): Resource {
         return new Resource([RType.default()])
-    }
-
-    assign (source: Record<string, any>): this {
-        let key
-        const keys = Object.keys(source)
-
-        if ((key = keys.find(f => f === 'id')))
-            this.id = source[key]
-        
-        if ((key = keys.find(f => f === 'orgId')))
-            this.orgId = source[key]
-
-        if ((key = keys.find(f => f === 'name')))
-            this.name = source[key]
-
-        if ((key = keys.find(f => f === 'quantity')))
-            this.quantity = parseFloat(source[key])
-
-        if ((key = keys.find(f => f === 'um')))
-            this.um = source[key]
-
-        if ((key = keys.find(f => f === 'freeText')))
-            this.freeText = source[key]
-
-        if ((key = keys.find(f => f === 'status')))
-            this.status = source[key]
-
-        if ((key = keys.find(f => f === 'nationality')))
-            this.nationality = source[key]
-
-        if ((key = keys.find(f => f === 'rType'))) {
-            this.rType = new Array<RType>()
-            if (source[key] instanceof Array)
-                source[key].forEach((add: Record<string, any>) => this.rType?.push(RType.default().assign(add)))
-            else 
-                this.rType.push(RType.default().assign(source[key]))
-        }   
-        
-        if ((key = keys.find(f => f === 'rGeo'))) {
-            this.rGeo = new Array<RGeo>()
-            if (source[key] instanceof Array)
-                source[key].forEach((add: Record<string, any>) => this.rGeo?.push(RGeo.default().assign(add)))
-            else 
-                this.rGeo.push(RGeo.default().assign(source[key]))
-        }   
-
-        if ((key = keys.find(f => f === 'contact'))) {
-            this.contact = new Array<Contact>()
-            if (source[key] instanceof Array)
-                source[key].forEach((add: Record<string, any>) => this.contact?.push(Contact.default().assign(add)))
-            else 
-                this.contact.push(Contact.default().assign(source[key]))
-        }   
-        
-        return this
     }
 }

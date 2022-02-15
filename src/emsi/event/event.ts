@@ -6,7 +6,7 @@ import { EType } from './event-type'
 import { Reference } from './reference'
 import { EventError } from '../../error'
 import { Casualties } from './casualties'
-import { Default } from '../../common/default'
+import { Default, IdentifyArrayProperty, IndexDefaultMethod, TypeOfArray } from "../../common/default"
 
 export class Event extends Default {
     id?: EventId
@@ -21,8 +21,11 @@ export class Event extends Default {
     obsDatime?: Datime
     status?: Status
     riskAssessmnt?: RiskAssessmnt
+    @IdentifyArrayProperty(TypeOfArray.OBJECT_ARRAY) 
     reference?: Array<Reference>
+    @IdentifyArrayProperty(TypeOfArray.OBJECT_ARRAY) 
     casualties?: Array<Casualties>
+    @IdentifyArrayProperty(TypeOfArray.OBJECT_ARRAY) 
     eGeo?: Array<EGeo>
     cause?: Cause
     freeText?: FreeText
@@ -117,80 +120,8 @@ export class Event extends Default {
         return this
     }    
 
+    @IndexDefaultMethod()
     static default (): Event {
         return new Event(NULL_UUID)
-    }
-
-    assign (source: Record<string, any>): this {
-        let key
-        const keys = Object.keys(source)
-
-        if ((key = keys.find(f => f === 'id')))
-            this.id = source[key]
-
-        if ((key = keys.find(f => f === 'name')))
-            this.name = source[key]
-
-        if ((key = keys.find(f => f === 'mainEventId')))
-            this.mainEventId = source[key]
-
-        if ((key = keys.find(f => f === 'eType')))
-            this.eType = EType.default().assign(source[key])
-
-        if ((key = keys.find(f => f === 'source')))
-            this.source = source[key]
-
-        if ((key = keys.find(f => f === 'scale')))
-            this.scale = source[key]
-
-        if ((key = keys.find(f => f === 'certainly')))
-            this.certainly = parseInt(source[key])
-
-        if ((key = keys.find(f => f === 'declDatime')))
-            this.declDatime = source[key]
-
-        if ((key = keys.find(f => f === 'occDatime')))
-            this.occDatime = source[key]
-
-        if ((key = keys.find(f => f === 'obsDatime')))
-            this.obsDatime = source[key]
-            
-        if ((key = keys.find(f => f === 'status')))
-            this.status = source[key]
-
-        if ((key = keys.find(f => f === 'riskAssessmnt')))
-            this.riskAssessmnt = source[key]
-
-        if ((key = keys.find(f => f === 'reference'))) {
-            this.reference = new Array<Reference>()
-            if (source[key] instanceof Array)
-                source[key].forEach((add: Record<string, any>) => this.reference?.push(Reference.default().assign(add)))
-            else 
-                this.reference.push(Reference.default().assign(source[key]))
-        }            
-        
-        if ((key = keys.find(f => f === 'eGeo'))) {
-            this.eGeo = new Array<EGeo>()
-            if (source[key] instanceof Array)
-                source[key].forEach((add: Record<string, any>) => this.eGeo?.push(EGeo.default().assign(add)))
-            else 
-                this.eGeo.push(EGeo.default().assign(source[key]))
-        }    
-           
-        if ((key = keys.find(f => f === 'casualties'))) {
-            this.casualties = new Array<Casualties>()
-            if (source[key] instanceof Array)
-                source[key].forEach((add: Record<string, any>) => this.casualties?.push(Casualties.default().assign(add)))
-            else 
-                this.casualties.push(Casualties.default().assign(source[key]))
-        }          
-
-        if ((key = keys.find(f => f === 'cause')))
-            this.cause = source[key]
-
-        if ((key = keys.find(f => f === 'freeText')))
-            this.freeText = source[key]
-
-        return this
     }
 }

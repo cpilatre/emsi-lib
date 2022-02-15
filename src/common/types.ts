@@ -25,7 +25,7 @@ export type Actor = string
 export type LocType = string
 export type Env = string
 export enum Source { COMPUTER_FORECAST = 'COMFOR', HUMAN_DEDUCTION = 'HUMDED', HUMAN_OBSERVATION = 'HUMOBS', SENSOR_OBSERVATION = 'SENSOR' }
-export enum Scale { LEVEL_1 = '1', LEVEL_2  = '2', LEVEL_3 = '3', LEVEL_4 = '4', LEVEL_5  = '5' }
+export enum Scale { LEVEL_1 = 1, LEVEL_2  = 2, LEVEL_3 = 3, LEVEL_4 = 4, LEVEL_5  = 5 }
 export type Certainly = number
 export enum Status { EVENT_COMPLETE = 'COM', EVENT_IN_PROGRESS = 'IPR', EVENT_NOT_STARTED = 'NST', EVENT_UNDER_CONTROL = 'STOP', EVENT_ABORTED = 'ABO', EVENT_CANCELLED = 'CANCLD' }
 export enum RiskAssessmnt { INCREASING = 'INCREA', DECREASING = 'DECREA', STABLE = 'STABLE' }
@@ -41,7 +41,7 @@ export enum CasualtiesContext { REQUIRING_ACTION = 'REQ_ACTION', ALREADY_TREATED
     PREDICTED_MEDIUM = 'PRED_MEDIUM', INITIAL_STATEMENT = 'INITIAL_STAT', PRELIMINARY_ASSESSMENT = 'PRELIM_STAT' }
 export enum CasualtiesStatus { CITIZEN = 'CITIZEN', EMERGENCY_TEAM = 'ET', AUTHORITIES = 'AUTHO', VERY_IMPORTANT_PERSON = 'VIP',
     MIXED = 'MIXED', UNKNOWN = 'UNK' }
-export enum Triage { GREY = '-1', BLUE = '0', GREEN = '1', YELLOW = '2', ORANGE = '3', RED = '4', BLACK = '5' }
+export enum Triage { GREY = -1, BLUE = 0, GREEN = 1, YELLOW = 2, ORANGE = 3, RED = 4, BLACK = 5 }
 export enum Contamination { SUPPOSED_CONTAMINED = 'SUP_CONT', DECONTAMINATION_IN_PROGRESS = 'DECON_PROG', DECONTAMINATION_COMPLETED = 'DECON_END',
     WITHOUT_CONTAMINATION = 'NO_CONT', CONTAMINATION_NOT_ASSESSED = 'NO_EVAL' }
 export enum Location { CONFINED = 'CONFINED', EVACUATED = 'EVACUATED', DISPLACED = 'DISPLACED', TRAPPED = 'TRAPPED' }
@@ -62,7 +62,7 @@ export type MissionType = string
 export type MissionId = string
 export type MainMissionId = string
 export enum MissionStatus { ABORTED = 'ABO', CANCELLED = 'CANCLD', COMPLETE = 'COM', IN_PROGRESS = 'IPR', NOT_STARTED = 'NST', IN_PAUSE = 'PAU' }
-export enum MissionPriority { LOW_PRIORITY = '0', P1 = '1', P2 = '2', P3 = '3', P4 = '4', HIGHEST_PRIORITY = '5' }
+export enum MissionPriority { LOW_PRIORITY = 0, P1 = 1, P2 = 2, P3 = 3, P4 = 4, HIGHEST_PRIORITY = 5 }
 
 // Resource types
 export type ResourceId = string

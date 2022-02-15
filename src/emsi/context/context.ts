@@ -5,19 +5,21 @@ import { ContextError } from '../../error'
 import { ExternalInfo } from './external-info'
 import { Link } from './link'
 import { Origin } from './origin'
-import { Default } from '../../common/default'
+import { Default, IdentifyArrayProperty, IndexDefaultMethod, TypeOfArray } from "../../common/default"
 
 export class Context extends Default {
     id: ContextId
     mode: Mode
     msgType: MsgType
     creation: Datime
+    @IdentifyArrayProperty(TypeOfArray.OBJECT_ARRAY) 
     link?: Array<Link>
     level?: Level
     seClass?: SeClass
     freeText?: FreeText
     urgency?: Urgency
     origin?: Origin
+    @IdentifyArrayProperty(TypeOfArray.OBJECT_ARRAY) 
     externalInfo?: Array<ExternalInfo>
 
     constructor (mode: Mode, msgType: MsgType, id?: ContextId, creation?: Date) {
@@ -69,57 +71,8 @@ export class Context extends Default {
         return this
     }
 
+    @IndexDefaultMethod()
     static default (): Context {
         return new Context(Mode.SYSTEM, MsgType.ERROR, NULL_UUID)
-    }
-
-    assign (source: Record<string, any>): this {
-        let key
-        const keys = Object.keys(source)
-
-        if ((key = keys.find(f => f === 'id')))
-            this.id = source[key]
-
-        if ((key = keys.find(f => f === 'mode')))
-            this.mode = source[key]            
-
-        if ((key = keys.find(f => f === 'msgType')))
-            this.msgType = source[key]    
-
-        if ((key = keys.find(f => f === 'creation')))
-            this.creation = source[key]    
-        
-        if ((key = keys.find(f => f === 'link'))) {
-            this.link = new Array<Link>()
-            if (source[key] instanceof Array)
-                source[key].forEach((add: Record<string, any>) => this.link?.push(Link.default().assign(add)))
-            else 
-                this.link.push(Link.default().assign(source[key]))
-        }
-
-        if ((key = keys.find(f => f === 'level')))
-            this.level = source[key]    
-            
-        if ((key = keys.find(f => f === 'seClass')))
-            this.seClass = source[key]
-
-        if ((key = keys.find(f => f === 'freeText')))
-            this.freeText = source[key]
-
-        if ((key = keys.find(f => f === 'urgency')))
-            this.urgency = source[key]
-
-        if ((key = keys.find(f => f === 'origin'))) 
-            this.origin = Origin.default().assign(source[key])
-
-        if ((key = keys.find(f => f === 'externalInfo'))) {
-            this.externalInfo = new Array<ExternalInfo>()
-            if (source[key] instanceof Array)
-                source[key].forEach((add: Record<string, any>) => this.externalInfo?.push(ExternalInfo.default().assign(add)))
-            else 
-                this.externalInfo.push(ExternalInfo.default().assign(source[key]))
-        }
-
-        return this
     }
 }

@@ -1,6 +1,6 @@
 import { v4 } from "uuid"
 import { MAX_FREETEXT_LENGTH, MAX_ID_LENGTH, MAX_NAME_X2_LENGTH, MAX_RESOURCE_ID_LENGTH } from "../../common/config"
-import { Default } from "../../common/default"
+import { Default, IdentifyArrayProperty, IndexDefaultMethod, TypeOfArray } from "../../common/default"
 import { Datime, FreeText, MainMissionId, MissionId, MissionPriority, MissionStatus, MissionType, Name, OrgId, ResourceId } from "../../common/types"
 import { MissionError } from "../../error"
 import { Position } from "../location"
@@ -15,15 +15,18 @@ export class Mission extends Default {
     status?: MissionStatus | string
     startTime?: Datime
     endTime?: Datime
+    @IdentifyArrayProperty(TypeOfArray.STRING_ARRAY) 
     resourceId?: Array<ResourceId>
+    @IdentifyArrayProperty(TypeOfArray.STRING_ARRAY) 
     parentMissionId?: Array<MissionId>
+    @IdentifyArrayProperty(TypeOfArray.STRING_ARRAY) 
     childMissionId?: Array<MissionId>
     position?: Position
     priority?: MissionPriority
 
     constructor (type: MissionType, id?: MissionId) {
-        MissionError.checkLength(id, MAX_ID_LENGTH)
         super()
+        MissionError.checkLength(id, MAX_ID_LENGTH)
         this.type = type
         this.id = id || v4()
     }
@@ -53,7 +56,6 @@ export class Mission extends Default {
     }
 
     setStatus (status: MissionStatus, completeness?: number): this {
-
         if (status === MissionStatus.IN_PROGRESS && completeness) 
             if (completeness > 0 && completeness < 100)
                 this.status = MissionStatus.IN_PROGRESS + completeness.toString().padStart(2, '0')
@@ -111,71 +113,8 @@ export class Mission extends Default {
         return this
     }
 
+    @IndexDefaultMethod()
     static default(): Mission {
         return new Mission('')
-    }
-
-    assign(source: Record<string, any>): this {
-        let key
-        const keys = Object.keys(source)
-
-        if ((key = keys.find(f => f === 'type')))
-            this.type = source[key]
-
-        if ((key = keys.find(f => f === 'freeText')))
-            this.freeText = source[key]
-
-        if ((key = keys.find(f => f === 'id')))
-            this.id = source[key]            
-
-        if ((key = keys.find(f => f === 'mainMissionId')))
-            this.mainMissionId = source[key]
-
-        if ((key = keys.find(f => f === 'orgId')))
-            this.orgId = source[key]
-
-        if ((key = keys.find(f => f === 'name')))
-            this.name = source[key]
-
-        if ((key = keys.find(f => f === 'status')))
-            this.status = source[key]
-        
-        if ((key = keys.find(f => f === 'startTime')))
-            this.startTime = source[key]
-
-        if ((key = keys.find(f => f === 'endTime')))
-            this.endTime = source[key]
-
-        if ((key = keys.find(f => f === 'resourceId'))) {
-            this.resourceId = new Array<ResourceId>()
-            if (source[key] instanceof Array)
-                source[key].forEach((add: string) => this.resourceId?.push(add))
-            else 
-                this.resourceId.push(source[key])
-        }     
-
-        if ((key = keys.find(f => f === 'parentMissionId'))) {
-            this.parentMissionId = new Array<MissionId>()
-            if (source[key] instanceof Array)
-                source[key].forEach((add: string) => this.parentMissionId?.push(add))
-            else 
-                this.parentMissionId.push(source[key])
-        }               
-
-        if ((key = keys.find(f => f === 'childMissionId'))) {
-            this.childMissionId = new Array<MissionId>()
-            if (source[key] instanceof Array)
-                source[key].forEach((add: string) => this.childMissionId?.push(add))
-            else 
-                this.childMissionId.push(source[key])
-        }               
-
-        if ((key = keys.find(f => f === 'position')))
-            this.position = Position.default().assign(source[key])   
-        
-        if ((key = keys.find(f => f === 'priority')))
-            this.priority = source[key]
-
-        return this
     }
 }

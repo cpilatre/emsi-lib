@@ -1,5 +1,5 @@
 import { MAX_WEATHER_LENGTH, MAX_ETYPE_LENGTH, MAX_FREETEXT_LENGTH, MAX_ID_LENGTH } from "../../common/config";
-import { Default } from "../../common/default"
+import { Default, IdentifyArrayProperty, IndexDefaultMethod, TypeOfArray } from "../../common/default"
 import { Datime, EGeoId, EGeoStatus, EGeoType, FreeText, Weather } from "../../common/types";
 import { EventError } from "../../error";
 import { Position } from "../location";
@@ -7,6 +7,7 @@ import { Position } from "../location";
 export class EGeo extends Default {
     datime?: Datime
     type: EGeoType
+    @IdentifyArrayProperty(TypeOfArray.STRING_ARRAY) 
     weather?: Array<Weather>
     freeText?: FreeText
     position?: Position
@@ -50,40 +51,8 @@ export class EGeo extends Default {
         return this
     }
 
+    @IndexDefaultMethod()
     static default (): EGeo {
         return new EGeo('')
-    }
-
-    assign (source: Record<string, any>): this {
-        let key
-        const keys = Object.keys(source)
-
-        if ((key = keys.find(f => f === 'datime')))
-            this.datime = source[key]
-
-        if ((key = keys.find(f => f === 'type')))
-            this.type = source[key]            
-
-        if ((key = keys.find(f => f === 'weather'))) {
-            this.weather = new Array<Weather>()
-            if (source[key] instanceof Array)
-                source[key].forEach((add: string) => this.weather?.push(add))
-            else 
-                this.weather.push(source[key])
-        }   
-
-        if ((key = keys.find(f => f === 'freeText')))
-            this.freeText = source[key]            
-
-        if ((key = keys.find(f => f === 'position')))
-            this.position = Position.default().assign(source[key])   
-
-        if ((key = keys.find(f => f === 'id')))
-            this.id = source[key]     
-
-        if ((key = keys.find(f => f === 'status')))
-            this.status = source[key]            
-
-        return this
     }
 }

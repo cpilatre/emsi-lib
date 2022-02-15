@@ -1,4 +1,4 @@
-import { Default } from "../../common/default"
+import { Default, IndexDefaultMethod } from "../../common/default"
 import { Height, Latitude, Longitude } from "../../common/types";
 import { PositionError } from "../../error";
 
@@ -19,23 +19,8 @@ export class Coord extends Default {
         this.height = height
     }
 
+    @IndexDefaultMethod()
     static default (): Coord {
         return new Coord(0, 0)
-    }
-
-    assign (source: Record<string, any>): this {
-        let key
-        const keys = Object.keys(source)
-
-        if ((key = keys.find(f => f === 'lat')))
-            this.lat = parseFloat(source[key])
-
-        if ((key = keys.find(f => f === 'lon')))
-            this.lon = parseFloat(source[key])
-
-        if ((key = keys.find(f => f === 'height')))
-            this.height = parseFloat(source[key])
-
-        return this
     }
 }

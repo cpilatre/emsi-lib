@@ -1,5 +1,5 @@
 import { MAX_ID_LENGTH, MAX_USER_ID_LENGTH, MAX_NAME_X2_LENGTH, NULL_UUID } from "../../common/config"
-import { Default } from "../../common/default"
+import { Default, IndexDefaultMethod } from "../../common/default"
 import { Name, OrgId, UserId } from "../../common/types"
 import { ContextError } from "../../error"
 
@@ -18,22 +18,7 @@ export class Origin extends Default {
         this.name = name      
     }
 
-    assign (source: Record<string, any>): this {
-        let key
-        const keys = Object.keys(source)
-
-        if ((key = keys.find(f => f === 'orgId')))
-            this.orgId = source[key]
-
-        if ((key = keys.find(f => f === 'userId')))
-            this.userId = source[key]
-
-        if ((key = keys.find(f => f === 'name')))
-            this.name = source[key]
-
-        return this
-    }
-
+    @IndexDefaultMethod()
     static default (): Origin {
         return new Origin(NULL_UUID)
     }
