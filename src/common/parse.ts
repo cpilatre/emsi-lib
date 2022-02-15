@@ -1,5 +1,5 @@
 import he from 'he'
-import { j2xParser, parse, validate } from 'fast-xml-parser'
+import { XMLParser, XMLBuilder, XMLValidator } from 'fast-xml-parser'
 
 export type ParseOptions = Record<string, unknown>
 export type Js2XmlFn = (node: unknown, options?: ParseOptions) => string
@@ -10,7 +10,7 @@ const options2xml = {
     format: true,
     indentBy: '  ',
     supressEmptyNode: true,
-    tagValueProcessor: (value: string | number) => he.encode('' + value, { useNamedReferences: true })
+    tagValueProcessor: (_: string, tagValue: string | number) => he.encode('' + tagValue, { useNamedReferences: true })
 }
 
 const options2js = {
@@ -22,7 +22,7 @@ const options2js = {
     trimValues: true,
     parseTrueNumberOnly: false,
     arrayMode: false, 
-    tagValueProcessor : (text: string) => he.decode(text)
+    tagValueProcessor : (_: string, tagValue: string) => he.decode(tagValue)
 }
 
 export function js2xml (node: unknown, options?: ParseOptions, fn?: Js2XmlFn): string {
@@ -30,8 +30,8 @@ export function js2xml (node: unknown, options?: ParseOptions, fn?: Js2XmlFn): s
 }
 
 function defaultJs2Xml (node: unknown, options?: ParseOptions): string {
-    const p2xml = new j2xParser({ ...options2xml, ...options })
-    let xml = p2xml.parse(node)
+    const builder = new XMLBuilder({ ...options2xml, ...options })
+    let xml = builder.build(node)
 
     if (options?.toUpperCase)
         xml = xml.replace(/<\/?[\w]+\/?>/g, (c: string) => c.toUpperCase())
@@ -47,12 +47,11 @@ export function xml2js (xml: string, options?: ParseOptions, fn?: Xml2JsFn): Rec
 }
 
 function defaultXml2js (xml: string, options?: ParseOptions): Record<string, unknown> | undefined {
-    if (validate(xml) === true) { 
-
+    if (XMLValidator.validate(xml) === true) { 
         // Remove NameSpace
         const toJs = xml.replace(/(<\/?)[\w]*:/g, (c: string, p1: string) => p1 )
-
-        return parse(toJs, { ...options2js, ...options })
+        const parser = new XMLParser({ ...options2js, ...options })
+        return parser.parse(toJs)
     }
     return undefined
 }
